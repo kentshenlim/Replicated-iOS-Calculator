@@ -2,6 +2,7 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 
     'Lucida Sans', Arial, sans-serif;
     font-size: 1em;
+    box-sizing: border-box;
 }
 
 
@@ -21,41 +22,38 @@ html {
 body {
     width: 100%;
     height: 100%;
-    border: solid blue 3px;
 }
 
 
 body>.calculator-panel {
-    height: 75%; /*Of body*/
+    height: 80%; /*Of body*/
     min-height: 350px; /*If window too small, don't squeeze out buttons*/
-    aspect-ratio: 1/1.5;
+    aspect-ratio: 4/7;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    border: solid green 3px;
 }
 
 
 .calculator-panel>.output {
-    height: 30%; /*Of .calculator panel*/
+    height: calc(2/7*100%); /*Of .calculator panel*/
     flex: 1 1 auto;
     border: solid red 3px;
-    background-color: aqua;
 }
 
 
 .calculator-panel>.buttons {
     display: flex;
-    height: 70%;
-    flex: 1 1 auto; /*Auto, keep the 30%-to-70% ratio*/
+    height: calc(5/7*100%);
+    flex: 1 1 auto; /*Auto, always keep 2:5 ratio*/
     flex-direction: column;
     border: solid blue 3px;
-    gap: 1%;
+    gap: 2.5%;
 }
 
 
 .calculator-panel>.buttons>div {
-    flex: 1 1 0; /*Always fill the whole buttons box fully, same sizes*/
+    flex: 1 1 0; /*Always occupy as much as possible, same sizes*/
     display: flex;
     justify-content: space-between;
 }
@@ -77,7 +75,7 @@ body>.calculator-panel {
 
 
 .calculator-panel>.buttons>div.fifth-row {
-    gap: calc(18.5vh/6); /*Determined by finding the gaps of other rows*/
+    gap: calc(32vh/21); /*Determined by finding the gaps of other rows*/
 }
 
 
@@ -90,6 +88,3 @@ body>.calculator-panel {
     display: flex;
     justify-content: space-between;
 }
-
-
-
