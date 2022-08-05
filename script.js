@@ -16,3 +16,8 @@ function multiply(a,b) {
 function divide(a,b) {
     return a/b;
 }
+
+
+function operate(functionName, a, b) {
+    return functionName(a,b);
+}
