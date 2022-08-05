@@ -40,6 +40,7 @@ body>.calculator-panel {
     height: 30%; /*Of .calculator panel*/
     flex: 1 1 auto;
     border: solid red 3px;
+    background-color: aqua;
 }
 
 
@@ -60,13 +61,36 @@ body>.calculator-panel {
 }
 
 
-.calculator-panel>.buttons>div>button {
+.calculator-panel>.buttons>div>button,
+.calculator-panel>.buttons>div>.fifth-row-second>button {
     aspect-ratio: 1/1;
-    border-radius: 50%;
+    border-radius: 50%; /*Circular buttons*/
 }
 
 
-.calculator-panel>.buttons>div>button.button1to2 {
-    aspect-ratio: 2/1;
-    border-radius: 50%;
+/*Special styling for last row*/
+.button1to2 {
+    width: 100%;
+    border-radius: 999px; /*Want pill shape, don't use percentage*/
+    height: 100%;
 }
+
+
+.calculator-panel>.buttons>div.fifth-row {
+    gap: calc(18.5vh/6);
+}
+
+
+.calculator-panel>.buttons>div.fifth-row>div {
+    border: solid rebeccapurple 1px;
+    flex: 1 1 0;
+}
+
+
+.calculator-panel>.buttons>div.fifth-row>.fifth-row-second {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
