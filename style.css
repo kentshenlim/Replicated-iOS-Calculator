@@ -28,7 +28,7 @@ body {
 body>.calculator-panel {
     height: 75%; /*Of body*/
     aspect-ratio: 1/1.5;
-    margin: auto;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     border: solid green 3px;
@@ -37,6 +37,7 @@ body>.calculator-panel {
 
 .calculator-panel>.output {
     height: 30%; /*Of .calculator panel*/
+    flex: 1 1 auto;
     border: solid red 3px;
 }
 
@@ -44,13 +45,14 @@ body>.calculator-panel {
 .calculator-panel>.buttons {
     display: flex;
     height: 70%;
+    flex: 1 1 auto; /*Auto, keep the 30%-to-70% ratio*/
     flex-direction: column;
     border: solid blue 3px;
 }
 
 
 .calculator-panel>.buttons>div {
-    flex: 1 1 0;
+    flex: 1 1 0; /*Always fill the whole buttons box fully, same sizes*/
     display: flex;
     justify-content: space-between;
     border: solid red 3px;
@@ -58,7 +60,6 @@ body>.calculator-panel {
 
 
 .calculator-panel>.buttons>div>button {
-    width: 20%;
     aspect-ratio: 1/1;
     border-radius: 50%;
 }
