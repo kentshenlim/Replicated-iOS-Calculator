@@ -1,0 +1,61 @@
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 
+    'Lucida Sans', Arial, sans-serif;
+    font-size: 1em;
+}
+
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    width: 100vw;
+    height: 100vh;
+}
+
+
+body {
+    width: 100%;
+    height: 100%;
+    border: solid blue 3px;
+}
+
+
+body>.calculator-panel {
+    height: 75%; /*Of body*/
+    aspect-ratio: 1/1.5;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    border: solid green 3px;
+}
+
+
+.calculator-panel>.output {
+    height: 30%; /*Of .calculator panel*/
+    border: solid red 3px;
+}
+
+
+.calculator-panel>.buttons {
+    display: flex;
+    height: 70%;
+    flex-direction: column;
+    border: solid blue 3px;
+}
+
+
+.calculator-panel>.buttons>div {
+    flex: 1 1 0;
+    display: flex;
+    border: solid red 3px;
+}
+
+
+.calculator-panel>.buttons>div>button {
+    flex: 1 1 0;
+}
