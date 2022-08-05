@@ -27,6 +27,7 @@ body {
 
 body>.calculator-panel {
     height: 75%; /*Of body*/
+    min-height: 350px; /*If window too small, don't squeeze out buttons*/
     aspect-ratio: 1/1.5;
     margin: 0 auto;
     display: flex;
@@ -61,5 +62,11 @@ body>.calculator-panel {
 
 .calculator-panel>.buttons>div>button {
     aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
+
+.calculator-panel>.buttons>div>button.button1to2 {
+    aspect-ratio: 2/1;
     border-radius: 50%;
 }
