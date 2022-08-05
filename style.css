@@ -50,6 +50,7 @@ body>.calculator-panel {
     flex: 1 1 auto; /*Auto, keep the 30%-to-70% ratio*/
     flex-direction: column;
     border: solid blue 3px;
+    gap: 1%;
 }
 
 
@@ -57,7 +58,6 @@ body>.calculator-panel {
     flex: 1 1 0; /*Always fill the whole buttons box fully, same sizes*/
     display: flex;
     justify-content: space-between;
-    border: solid red 3px;
 }
 
 
@@ -77,12 +77,11 @@ body>.calculator-panel {
 
 
 .calculator-panel>.buttons>div.fifth-row {
-    gap: calc(18.5vh/6);
+    gap: calc(18.5vh/6); /*Determined by finding the gaps of other rows*/
 }
 
 
 .calculator-panel>.buttons>div.fifth-row>div {
-    border: solid rebeccapurple 1px;
     flex: 1 1 0;
 }
 
