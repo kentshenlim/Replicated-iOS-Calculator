@@ -22,7 +22,12 @@ function operate(functionName, a, b) {
     return functionName(a,b);
 }
 
+
 function updateDisplay(number) {
     const screen = document.querySelector("#screen");
     screen.textContent = number;
 }
+
+
+let currentScreen = "";
+digits = document.querySelectorAll("button.digit");

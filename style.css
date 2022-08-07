@@ -115,4 +115,6 @@ body>.calculator-panel {
     bottom: 0;
     right: 0;
     margin-bottom: 1%;
+    border: solid green 3px;
+    margin-right: 5%;
 }
