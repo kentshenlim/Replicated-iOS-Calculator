@@ -31,3 +31,9 @@ function updateDisplay(number) {
 
 let currentScreen = "";
 digits = document.querySelectorAll("button.digit");
+digits.forEach(digit => {
+    digit.addEventListener("click", () => {
+        currentScreen += digit.textContent;
+        updateDisplay(currentScreen);
+    })
+})
