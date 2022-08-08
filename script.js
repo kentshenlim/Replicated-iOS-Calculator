@@ -66,7 +66,7 @@ equal.addEventListener("click", () => {
     digitNextClear = true;
     if (currentOperator[0] == '+') {
         ans = operate(add, numberArray[0], numberArray[1]);
-    } else if (currentOperator[0] == '-') {
+    } else if (currentOperator[0] == '–') {
         ans = operate(subtract, numberArray[0], numberArray[1]);
     }
     updateDisplay(ans);
