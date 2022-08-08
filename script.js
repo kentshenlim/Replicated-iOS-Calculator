@@ -34,6 +34,7 @@ let currentNumber = "";
 let currentOperator = [];
 let numberArray = [];
 let digitNextClear = false;
+let ans;
 const digits = document.querySelectorAll("button.digit");
 digits.forEach(digit => {
     digit.addEventListener("click", () => {
@@ -56,5 +57,18 @@ operators.forEach(operator => {
         digitNextClear = true; // After clicked, next digit will clear screen
         currentOperator.push(operator.textContent);
     })
+})
+
+const equal = document.querySelector("#equal");
+equal.addEventListener("click", () => {
+    numberArray.push(+currentNumber);
+    currentNumber = "";
+    digitNextClear = true;
+    if (currentOperator[0] == '+') {
+        ans = operate(add, numberArray[0], numberArray[1]);
+    } else if (currentOperator[0] == '-') {
+        ans = operate(subtract, numberArray[0], numberArray[1]);
+    }
+    updateDisplay(ans);
 })
 
