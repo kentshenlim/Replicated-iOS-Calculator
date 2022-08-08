@@ -64,22 +64,26 @@ equal.addEventListener("click", () => {
     numberArray.push(+currentNumber);
     currentNumber = "";
     digitNextClear = true;
-    switch (currentOperator[0]) {
-        case ('+'):
-            ans = operate(add, numberArray[0], numberArray[1]);
-            break;
-        case ('–'):
-            ans = operate(subtract, numberArray[0], numberArray[1]);
-            break;
-        case ('÷'):
-            ans = operate(divide, numberArray[0], numberArray[1]);
-            break;
-        case ('×'):
-            ans = operate(multiply, numberArray[0], numberArray[1]);
-            break;
-    }   
+    if (numberArray.length === 1) ans = numberArray[0];
+    else {
+        switch (currentOperator[0]) {
+            case ('+'):
+                ans = operate(add, numberArray[0], numberArray[1]);
+                break;
+            case ('–'):
+                ans = operate(subtract, numberArray[0], numberArray[1]);
+                break;
+            case ('÷'):
+                ans = operate(divide, numberArray[0], numberArray[1]);
+                break;
+            case ('×'):
+                ans = operate(multiply, numberArray[0], numberArray[1]);
+                break;
+        }
+    } 
     updateDisplay(ans);
     currentOperator = [];
     numberArray = [];
 })
+
 
