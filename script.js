@@ -31,11 +31,12 @@ function updateDisplay(number) {
 
 let currentScreen = "";
 let currentNumber = "";
-let currentOperator = [];
+let operatorArray = [];
 let numberArray = [];
-let digitNextClear = false;
+let digitNextClear = false; 
 let ans;
-const digits = document.querySelectorAll("button.digit");
+
+const digits = document.querySelectorAll("button.digit"); // 0-9 and period
 digits.forEach(digit => {
     digit.addEventListener("click", () => {
         if (digitNextClear) {
@@ -44,18 +45,18 @@ digits.forEach(digit => {
             digitNextClear = false; // Digits after operator will clear screen
         }
         currentNumber += digit.textContent;
-        currentScreen += digit.textContent;
+        currentScreen = currentNumber;
         updateDisplay(currentScreen);
     })
 })
 
-const operators = document.querySelectorAll("button.operator");
+const operators = document.querySelectorAll("button.operator"); // + - x /
 operators.forEach(operator => {
     operator.addEventListener("click", () => {
         numberArray.push(+currentNumber); // Store digit string as number in array
         currentNumber = ""; // Reset to empty string for future use
         digitNextClear = true; // After clicked, next digit will clear screen
-        currentOperator.push(operator.textContent);
+        operatorArray.push(operator.textContent);
     })
 })
 
@@ -66,7 +67,7 @@ equal.addEventListener("click", () => {
     digitNextClear = true;
     if (numberArray.length === 1) ans = numberArray[0];
     else {
-        switch (currentOperator[0]) {
+        switch (operatorArray[0]) {
             case ('+'):
                 ans = operate(add, numberArray[0], numberArray[1]);
                 break;
@@ -82,7 +83,7 @@ equal.addEventListener("click", () => {
         }
     } 
     updateDisplay(ans);
-    currentOperator = [];
+    operatorArray = [];
     numberArray = [];
 })
 
