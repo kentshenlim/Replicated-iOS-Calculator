@@ -32,20 +32,29 @@ function updateDisplay(number) {
 let currentScreen = "";
 let currentNumber = "";
 let currentOperator = [];
-digits = document.querySelectorAll("button.digit");
+let numberArray = [];
+let digitNextClear = false;
+const digits = document.querySelectorAll("button.digit");
 digits.forEach(digit => {
     digit.addEventListener("click", () => {
+        if (digitNextClear) {
+            currentScreen = "";
+            updateDisplay(currentScreen);
+            digitNextClear = false; // Digits after operator will clear screen
+        }
         currentNumber += digit.textContent;
         currentScreen += digit.textContent;
         updateDisplay(currentScreen);
     })
 })
 
-operators = document.querySelectorAll("button.operator");
+const operators = document.querySelectorAll("button.operator");
 operators.forEach(operator => {
     operator.addEventListener("click", () => {
+        numberArray.push(+currentNumber); // Store digit string as number in array
+        currentNumber = ""; // Reset to empty string for future use
+        digitNextClear = true; // After clicked, next digit will clear screen
         currentOperator.push(operator.textContent);
-        currentScreen = "";
-        updateDisplay(currentScreen);
     })
 })
+
