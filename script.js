@@ -70,5 +70,7 @@ equal.addEventListener("click", () => {
         ans = operate(subtract, numberArray[0], numberArray[1]);
     }
     updateDisplay(ans);
+    currentOperator = [];
+    numberArray = [];
 })
 
