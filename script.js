@@ -28,9 +28,11 @@ function updateDisplay(number) {
     screen.textContent = number;
 }
 
+
 function fourDPIfNonInteger(number) {
     return Math.round(number*10**4)/10**4; // At most 4 dp
 }
+
 
 function check() {
     console.log(`Current display: ${currentDisplay}`);
@@ -110,7 +112,7 @@ function evaluateNow() {
         }
     }
     updateDisplay(fourDPIfNonInteger(ans)); // 4 dp display if not integer
-    operatorArray = [];
+    operatorArray.pop(); // This function always uses last element, so pop out after using
     numberArray = [ans]; // Store exact value for carry-on calculations
     check();
 }
