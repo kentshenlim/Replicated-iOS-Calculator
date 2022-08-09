@@ -43,7 +43,7 @@ let currentDisplay = "";
 let operatorArray = [];
 let numberArray = [];
 let digitNextClear = false; 
-let evaluateNext = false;
+let evaluateNext = true;
 let ans;
 
 const digits = document.querySelectorAll("button.digit"); // 0-9 and period
@@ -61,13 +61,12 @@ operators.forEach(operator => {
         numberArray.push(+currentDisplay); // Store digit string as number in array
         currentDisplay = ""; // Reset to empty string for future use
         const clicked = operator.textContent;
-        operatorArray.push(clicked);
         if (evaluateNext) {
             evaluateNow();
-            evaluateNext = false; // Instant display of multiplication and division
-            operatorArray.push(clicked); // Stored again, cleared by evaluateNow()
+            /* evaluateNext = false; */ // Instant display of multiplication and division
         }
-        evaluateNext = operator.classList.contains("priority"); // Preparing instant display
+        /* evaluateNext = operator.classList.contains("priority") */; // Preparing instant display
+        operatorArray.push(clicked);
         check();
     })
 }) // × or ÷ followed by digits and then followed by any operator will cause instant evaluation
