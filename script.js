@@ -28,30 +28,35 @@ function updateDisplay(number) {
     screen.textContent = number;
 }
 
-
-function clearScreen() {
-    currentScreen = "";
-    updateDisplay(currentScreen);
+function roundIfNonInteger(number) {
+    return Math.round(number*10**4)/10**4; // At most 4 dp
 }
 
+function check() {
+    console.log(`Current number: ${currentNumber}`);
+    console.log(`Operator array: ${operatorArray}`);
+    console.log(`Number array: ${numberArray}`);
+}
 
 let currentScreen = "";
 let currentNumber = "";
 let operatorArray = [];
 let numberArray = [];
 let digitNextClear = false; 
-let ans;
 let evaluateNext = false;
+let ans;
 
 const digits = document.querySelectorAll("button.digit"); // 0-9 and period
 digits.forEach(digit => {
     digit.addEventListener("click", () => {
         if (digitNextClear) {
-            updateDisplay(currentNumber); // Clear screen, current number is ""
-            digitNextClear = false; // Only digit just after operator will clear screen
+            updateDisplay(""); // Clear screen, current number is ""
+            digitNextClear = false; // Only first digit just after operator will clear screen
         }
         currentNumber += digit.textContent;
         updateDisplay(currentNumber);
+        check();
+        
     })
 })
 
@@ -69,13 +74,15 @@ operators.forEach(operator => {
             operatorArray.push(clicked); // Stored again, cleared by evaluateNow()
         }
         evaluateNext = (clicked == '×' || clicked == '÷'); // Preparing instant display
+        check();
     })
-})
+}) // × or ÷ followed by digits and then followed by any operator will cause instant evaluation
 
 const equal = document.querySelector("#equal");
 equal.addEventListener("click", () => {
     evaluateNow();
     numberArray = [];
+    check();
 });
 
 function evaluateNow() {
