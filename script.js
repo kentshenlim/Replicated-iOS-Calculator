@@ -77,6 +77,7 @@ equal.addEventListener("click", () => {
     numberArray.push(+currentDisplay);
     currentDisplay = "";
     evaluateNow();
+    evaluateNext = false;
     check();
 });
 
