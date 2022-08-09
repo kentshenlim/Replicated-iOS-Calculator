@@ -28,7 +28,7 @@ function updateDisplay(number) {
     screen.textContent = number;
 }
 
-function roundIfNonInteger(number) {
+function fourDPIfNonInteger(number) {
     return Math.round(number*10**4)/10**4; // At most 4 dp
 }
 
@@ -92,16 +92,16 @@ function evaluateNow() {
             case ('–'):
                 ans = operate(subtract, secondLast, last);
                 break;
-            case ('÷'):
-                ans = operate(divide, secondLast, last);
-                break;
             case ('×'):
                 ans = operate(multiply, secondLast, last);
                 break;
+            case ('÷'):
+                ans = operate(divide, secondLast, last);
+                break;
         }
-    } 
-    updateDisplay(ans);
+    }
+    updateDisplay(fourDPIfNonInteger(ans)); // 4 dp display if not integer
     operatorArray = [];
-    numberArray = [ans];
+    numberArray = [ans]; // Store exact value for carry-on calculations
     check();
 }
