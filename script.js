@@ -39,6 +39,15 @@ function check() {
 }
 
 
+function clearAll() {
+    currentDisplay = "";
+    operatorArray = [];
+    numberArray = [];
+    digitNextClear = false;
+    evaluateNext = true;
+}
+
+
 let currentDisplay = "";
 let operatorArray = [];
 let numberArray = [];
@@ -105,3 +114,10 @@ function evaluateNow() {
     numberArray = [ans]; // Store exact value for carry-on calculations
     check();
 }
+
+
+const clc = document.querySelector("#clc");
+clc.addEventListener("click", () => {
+    clearAll();
+    updateDisplay(0);
+})
