@@ -46,7 +46,7 @@ function clearAll() {
     operatorArray = [];
     numberArray = [];
     digitNextClear = false;
-    evaluateNext = true;
+    evaluateNext = false;
 }
 
 
@@ -62,7 +62,7 @@ let currentDisplay = "";
 let operatorArray = [];
 let numberArray = [];
 let digitNextClear = false; 
-let evaluateNext = true;
+let evaluateNext = false;
 let ans;
 
 const digits = document.querySelectorAll("button.digit"); // 0-9 and period
@@ -82,12 +82,14 @@ operators.forEach(operator => {
     operator.addEventListener("click", () => {
         storeNonEmptyCurrentDisplay();
         const clicked = operator.textContent;
-        if (evaluateNext) {
-            evaluateNow();
-            /* evaluateNext = false; */ // Instant display of multiplication and division
-        }
-        /* evaluateNext = operator.classList.contains("priority") */; // Preparing instant display
         operatorArray.push(clicked);
+        if (evaluateNext && operatorArray.length >= 2) {
+            let tempNumberArray = numberArray.splice(numberArray.length-2,2); // Remove the last two, store all previous numbers
+            evaluateNow(); // The numberArray is now [ans]
+            numberArray = tempNumberArray.concat(numberArray); // Get back previous num + ans
+            evaluateNext = false; // Instant display of multiplication and division
+        }
+        evaluateNext = operator.classList.contains("priority"); // Preparing instant display
         check();
     })
 }) // × or ÷ followed by digits and then followed by any operator will cause instant evaluation
