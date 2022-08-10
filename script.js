@@ -82,13 +82,14 @@ operators.forEach(operator => {
     operator.addEventListener("click", () => {
         storeNonEmptyCurrentDisplay();
         const clicked = operator.textContent;
-        operatorArray.push(clicked);
-        if (evaluateNext && operatorArray.length >= 2) {
-            let tempNumberArray = numberArray.splice(numberArray.length-2,2); // Remove the last two, store all previous numbers
+        if (evaluateNext && operatorArray.length >= 1) { // If currently not empty
+            let tempNumberArray = [...numberArray]; // Store first, don't modify numberArray
+            tempNumberArray.splice(tempNumberArray.length-2,2); // Remove the last two, store all previous numbers
             evaluateNow(); // The numberArray is now [ans]
             numberArray = tempNumberArray.concat(numberArray); // Get back previous num + ans
             evaluateNext = false; // Instant display of multiplication and division
         }
+        operatorArray.push(clicked);
         evaluateNext = operator.classList.contains("priority"); // Preparing instant display
         check();
     })
