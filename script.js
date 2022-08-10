@@ -58,6 +58,43 @@ function storeNonEmptyCurrentDisplay() {
 }
 
 
+function evaluateNow() {
+    if (numberArray.length === 1) ans = numberArray[0];
+    else {
+        const last = numberArray[numberArray.length-1];
+        const secondLast = numberArray[numberArray.length-2];
+        switch (operatorArray[operatorArray.length-1]) {
+            case ('+'):
+                ans = operate(add, secondLast, last);
+                break;
+            case ('–'):
+                ans = operate(subtract, secondLast, last);
+                break;
+            case ('×'):
+                ans = operate(multiply, secondLast, last);
+                break;
+            case ('÷'):
+                ans = operate(divide, secondLast, last);
+                break;
+        }
+    }
+    updateDisplay(fourDPIfNonInteger(ans)); // 4 dp display if not integer
+    operatorArray.pop(); // This function always uses last element, so pop out after using
+    numberArray = [ans]; // Store exact value for carry-on calculations
+    check();
+}
+
+
+function evaluateEverythingNow() {
+    while (operatorArray.length >= 1) {
+        let tempNumberArray = [...numberArray]; // Store first, don't modify numberArray
+        tempNumberArray.splice(tempNumberArray.length-2,2); // Remove the last two, store all previous numbers
+        evaluateNow();
+        numberArray = tempNumberArray.concat(numberArray);
+    }
+}
+
+
 let currentDisplay = "",
 operatorArray = [],
 numberArray = [],
@@ -93,12 +130,7 @@ operators.forEach(operator => {
             evaluateNext = false; // x / removed, so set back to default false
         }
         if (!operator.classList.contains("priority") && operatorArray.length >= 1) { // If in addition + or - pressed
-            while (operatorArray.length >= 1) {
-                let tempNumberArray = [...numberArray]; // Store first, don't modify numberArray
-                tempNumberArray.splice(tempNumberArray.length-2,2); // Remove the last two, store all previous numbers
-                evaluateNow();
-                numberArray = tempNumberArray.concat(numberArray);
-            }
+            evaluateEverythingNow()
         } /*The first if always removes * and /, the second if triggers complete calculation if + or - pressed*/
         operatorArray.push(clicked);
         evaluateNext = operator.classList.contains("priority"); // Preparing instant display
@@ -108,43 +140,11 @@ operators.forEach(operator => {
 
 const equal = document.querySelector("#equal");
 equal.addEventListener("click", () => {
-    storeNonEmptyCurrentDisplay()
-    while (operatorArray.length >= 1) {
-        let tempNumberArray = [...numberArray]; 
-        tempNumberArray.splice(tempNumberArray.length-2,2); 
-        evaluateNow();
-        numberArray = tempNumberArray.concat(numberArray);
-    }
+    storeNonEmptyCurrentDisplay();
+    evaluateEverythingNow();
     evaluateNext = false;
     check();
 }); // When = pressed, always evaluate everything until operatorArray becomes empty
-
-function evaluateNow() {
-    if (numberArray.length === 1) ans = numberArray[0];
-    else {
-        const last = numberArray[numberArray.length-1];
-        const secondLast = numberArray[numberArray.length-2];
-        switch (operatorArray[operatorArray.length-1]) {
-            case ('+'):
-                ans = operate(add, secondLast, last);
-                break;
-            case ('–'):
-                ans = operate(subtract, secondLast, last);
-                break;
-            case ('×'):
-                ans = operate(multiply, secondLast, last);
-                break;
-            case ('÷'):
-                ans = operate(divide, secondLast, last);
-                break;
-        }
-    }
-    updateDisplay(fourDPIfNonInteger(ans)); // 4 dp display if not integer
-    operatorArray.pop(); // This function always uses last element, so pop out after using
-    numberArray = [ans]; // Store exact value for carry-on calculations
-    check();
-}
-
 
 const clc = document.querySelector("#clc");
 clc.addEventListener("click", () => {
