@@ -109,10 +109,15 @@ operators.forEach(operator => {
 const equal = document.querySelector("#equal");
 equal.addEventListener("click", () => {
     storeNonEmptyCurrentDisplay()
-    evaluateNow();
+    while (operatorArray.length >= 1) {
+        let tempNumberArray = [...numberArray]; 
+        tempNumberArray.splice(tempNumberArray.length-2,2); 
+        evaluateNow();
+        numberArray = tempNumberArray.concat(numberArray);
+    }
     evaluateNext = false;
     check();
-});
+}); // When = pressed, always evaluate everything until operatorArray becomes empty
 
 function evaluateNow() {
     if (numberArray.length === 1) ans = numberArray[0];

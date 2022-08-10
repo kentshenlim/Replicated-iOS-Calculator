@@ -11,6 +11,11 @@ or AC the calculator after = has been pressed.
 2) Successive calculation with carry-on value  
 Key pressed: 2 + 3 = + 5 = * 4 = / 2 =  
 Binary operations using value from previous calculations.  
+3) Precedence rules for > binary operation
+Key pressed: 2 * 3 + 5 =  
+When + or - pressed, previous operations will all be evaluated.  
+Key pressed: 2 + 5 * 3 =  
+Must return 17 but not 13  
 
 # Bug Fixed
 1) After some calculations, with one number entered, pressing = will not return
