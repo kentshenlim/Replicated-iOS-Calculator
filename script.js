@@ -70,9 +70,12 @@ digits.forEach(digit => {
     digit.addEventListener("click", () => {
         currentDisplay += digit.textContent; // Concatenate numbers
         updateDisplay(currentDisplay);
+        /* After a calculation completed, pressing a digit implies no longer
+        interested in current answer, so can abort.
+        */
         if (numberArray.length != 0 && operatorArray.length == 0) {
             numberArray = [];
-        }
+        } // Bug fix 1, cf README.md
         check();
     })
 })
@@ -86,17 +89,17 @@ operators.forEach(operator => {
             let tempNumberArray = [...numberArray]; // Store first, don't modify numberArray
             tempNumberArray.splice(tempNumberArray.length-2,2); // Remove the last two, store all previous numbers
             evaluateNow(); // The numberArray is now [ans]
-            numberArray = tempNumberArray.concat(numberArray); // Get back previous num + ans
-            evaluateNext = false; // Instant display of multiplication and division
+            numberArray = tempNumberArray.concat(numberArray); // Get back previous unused num + ans
+            evaluateNext = false; // x / removed, so set back to default false
         }
-        else if (!operator.classList.contains("priority") && operatorArray.length >= 1) {
+        if (!operator.classList.contains("priority") && operatorArray.length >= 1) { // If in addition + or - pressed
             while (operatorArray.length >= 1) {
                 let tempNumberArray = [...numberArray]; // Store first, don't modify numberArray
                 tempNumberArray.splice(tempNumberArray.length-2,2); // Remove the last two, store all previous numbers
                 evaluateNow();
                 numberArray = tempNumberArray.concat(numberArray);
             }
-        }
+        } /*The first if always removes * and /, the second if triggers complete calculation if + or - pressed*/
         operatorArray.push(clicked);
         evaluateNext = operator.classList.contains("priority"); // Preparing instant display
         check();
