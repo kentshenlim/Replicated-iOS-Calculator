@@ -11,7 +11,7 @@ or AC the calculator after = has been pressed.
 Key pressed: 2 + 3 = + 5 = * 4 = / 2 =  
 Binary operations using value from previous calculations.  
 
-# Bug fixed
+# Bug Fixed
 1) After some calculations, with one number entered, pressing = will not return
 that number, but return the last answer instead.  
 Key pressed: 1 + 1 = 3 =  
