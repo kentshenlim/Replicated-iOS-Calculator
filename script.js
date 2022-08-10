@@ -89,6 +89,14 @@ operators.forEach(operator => {
             numberArray = tempNumberArray.concat(numberArray); // Get back previous num + ans
             evaluateNext = false; // Instant display of multiplication and division
         }
+        else if (!operator.classList.contains("priority") && operatorArray.length >= 1) {
+            while (operatorArray.length >= 1) {
+                let tempNumberArray = [...numberArray]; // Store first, don't modify numberArray
+                tempNumberArray.splice(tempNumberArray.length-2,2); // Remove the last two, store all previous numbers
+                evaluateNow();
+                numberArray = tempNumberArray.concat(numberArray);
+            }
+        }
         operatorArray.push(clicked);
         evaluateNext = operator.classList.contains("priority"); // Preparing instant display
         check();
