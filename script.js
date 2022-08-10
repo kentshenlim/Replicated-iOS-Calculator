@@ -58,12 +58,12 @@ function storeNonEmptyCurrentDisplay() {
 }
 
 
-let currentDisplay = "";
-let operatorArray = [];
-let numberArray = [];
-let digitNextClear = false; 
-let evaluateNext = false;
-let ans;
+let currentDisplay = "",
+operatorArray = [],
+numberArray = [],
+digitNextClear = false,
+evaluateNext = false,
+ans;
 
 const digits = document.querySelectorAll("button.digit"); // 0-9 and period
 digits.forEach(digit => {
