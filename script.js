@@ -70,6 +70,9 @@ digits.forEach(digit => {
     digit.addEventListener("click", () => {
         currentDisplay += digit.textContent; // Concatenate numbers
         updateDisplay(currentDisplay);
+        if (numberArray.length != 0 && operatorArray.length == 0) {
+            numberArray = [];
+        }
         check();
     })
 })
