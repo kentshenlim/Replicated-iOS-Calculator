@@ -158,9 +158,9 @@ color2 = document.querySelectorAll(".color2");
 
 color1and3.forEach(button => {
     button.addEventListener("click", () => {
-        button.classList.toggle("clicked");
+        button.classList.add("clicked");
     })
     button.addEventListener("transitionend", () => {
-        button.classList.toggle("clicked");
+        button.classList.remove("clicked");
     })
 })
