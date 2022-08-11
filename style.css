@@ -105,6 +105,7 @@ body>.calculator-panel {
 .color2 {
     background-color: #f1a33b;
     color: #ffffff;
+    transition: all 0.25s;
 }
 
 
@@ -136,6 +137,8 @@ body>.calculator-panel {
 
 .color2.clicked {
     background-color: #ffffff;
+    color: #f1a33b;
+    transition: all 0.25s;
 }
 
 

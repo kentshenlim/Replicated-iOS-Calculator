@@ -154,7 +154,8 @@ clc.addEventListener("click", () => {
 })
 
 const color1and3 = document.querySelectorAll(".color1, .color3"),
-color2 = document.querySelectorAll(".color2");
+color2 = document.querySelectorAll(".color2"),
+color3 = document.querySelectorAll(".color3");
 
 color1and3.forEach(button => {
     button.addEventListener("click", () => {
@@ -164,3 +165,15 @@ color1and3.forEach(button => {
         button.classList.remove("clicked");
     })
 })
+
+color2.forEach(button => {
+    button.addEventListener("click", () => {
+        button.classList.add("clicked");
+    })
+})
+
+color3.forEach(button => {
+    button.addEventListener("click", () => {
+        color2.forEach(ori => ori.classList.remove("clicked"))
+    })
+});
