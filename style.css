@@ -151,3 +151,7 @@ body>.calculator-panel {
     background-color: #737373;
     transition: all 0.25s;
 }
+
+#equal.clicked {
+    background-color: #fcc78d;
+}

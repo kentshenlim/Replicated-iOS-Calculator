@@ -153,11 +153,11 @@ clc.addEventListener("click", () => {
     check();
 });
 
-const color1and3 = document.querySelectorAll(".color1, .color3"),
-color2 = document.querySelectorAll(".color2"),
-color3 = document.querySelectorAll(".color3");
+const color1And3AndEqual = document.querySelectorAll(".color1, .color3, #equal"),
+color3 = document.querySelectorAll(".color3"),
+color2WithoutEqual = Array.from(document.querySelectorAll(".color2"));
 
-color1and3.forEach(button => {
+color1And3AndEqual.forEach(button => {
     button.addEventListener("click", () => {
         button.classList.add("clicked");
     })
@@ -166,7 +166,7 @@ color1and3.forEach(button => {
     })
 });
 
-color2.forEach(button => {
+color2WithoutEqual.forEach(button => {
     button.addEventListener("click", () => {
         button.classList.add("clicked");
     })
@@ -174,6 +174,6 @@ color2.forEach(button => {
 
 color3.forEach(button => {
     button.addEventListener("click", () => {
-        color2.forEach(ori => ori.classList.remove("clicked"))
+        color2WithoutEqual.forEach(ori => ori.classList.remove("clicked"))
     })
 });
