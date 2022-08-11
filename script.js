@@ -115,7 +115,7 @@ digits.forEach(digit => {
         } // Bug fix 1, cf README.md
         check();
     })
-})
+});
 
 const operators = document.querySelectorAll("button.operator"); // + - x /
 operators.forEach(operator => {
@@ -136,7 +136,7 @@ operators.forEach(operator => {
         evaluateNext = operator.classList.contains("priority"); // Preparing instant display
         check();
     })
-}) // × or ÷ followed by digits and then followed by any operator will cause instant evaluation
+}); // × or ÷ followed by digits and then followed by any operator will cause instant evaluation
 
 const equal = document.querySelector("#equal");
 equal.addEventListener("click", () => {
@@ -151,7 +151,7 @@ clc.addEventListener("click", () => {
     clearAll();
     updateDisplay(0);
     check();
-})
+});
 
 const color1and3 = document.querySelectorAll(".color1, .color3"),
 color2 = document.querySelectorAll(".color2"),
@@ -164,13 +164,13 @@ color1and3.forEach(button => {
     button.addEventListener("transitionend", () => {
         button.classList.remove("clicked");
     })
-})
+});
 
 color2.forEach(button => {
     button.addEventListener("click", () => {
         button.classList.add("clicked");
     })
-})
+});
 
 color3.forEach(button => {
     button.addEventListener("click", () => {
