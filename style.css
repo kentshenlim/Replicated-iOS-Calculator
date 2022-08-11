@@ -20,7 +20,7 @@ html {
 
 
 button {
-    font-size: calc(12px + 1rem)
+    font-size: calc(12px + 1rem);
 }
 
 
@@ -122,4 +122,27 @@ body>.calculator-panel {
     margin-bottom: 1%;
     border: solid green 3px;
     margin-right: 5%;
+}
+
+
+/*Color transitions*/
+.color1.clicked {
+    background-color: #d9d9d9;
+    transition-duration: 1s;
+}
+
+
+.color2.clicked {
+    background-color: #ffffff;
+}
+
+
+.color2.hold {
+    background-color: #fcc78d;
+}
+
+
+.color3.clicked {
+    background-color: #737373;
+    transition: all 0.5s;
 }

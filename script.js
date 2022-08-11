@@ -152,3 +152,15 @@ clc.addEventListener("click", () => {
     updateDisplay(0);
     check();
 })
+
+const color1and3 = document.querySelectorAll(".color1, .color3"),
+color2 = document.querySelectorAll(".color2");
+
+color1and3.forEach(button => {
+    button.addEventListener("click", () => {
+        button.classList.toggle("clicked");
+    })
+    button.addEventListener("transitionend", () => {
+        button.classList.toggle("clicked");
+    })
+})
