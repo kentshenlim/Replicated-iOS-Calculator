@@ -154,6 +154,12 @@ clc.addEventListener("click", () => {
     check();
 });
 
+const percentage = document.querySelector("#percentage");
+percentage.addEventListener("click", () => {
+    currentDisplay /= 100;
+    updateDisplay(currentDisplay);
+})
+
 const color1And3AndEqual = document.querySelectorAll(".color1, .color3, #equal"),
 color3 = document.querySelectorAll(".color3"),
 color2WithoutEqual = Array.from(document.querySelectorAll(".color2"));
