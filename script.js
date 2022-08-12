@@ -101,6 +101,8 @@ operatorArray = [],
 numberArray = [],
 digitNextClear = false,
 evaluateNext = false,
+lastOperator, // For successive =
+lastNumber, // For successive =
 ans;
 
 const digits = document.querySelectorAll("button.digit"); // 0-9 and period
@@ -141,6 +143,14 @@ operators.forEach(operator => {
 
 const equal = document.querySelector("#equal");
 equal.addEventListener("click", () => {
+    if (currentDisplay != "" && operatorArray.length != 0) {
+        lastOperator = operatorArray[operatorArray.length-1];
+        lastNumber = currentDisplay;
+    }
+    if (currentDisplay == "" && operatorArray.length == 0) {
+        currentDisplay = lastNumber;
+        operatorArray.push(lastOperator);
+    } // For successive =
     storeNonEmptyCurrentDisplay();
     evaluateEverythingNow();
     evaluateNext = false;
