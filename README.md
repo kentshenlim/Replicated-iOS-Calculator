@@ -1,7 +1,7 @@
 # Project Description
 Web version of replicated iOS built-in calculator app, written to practice 
-JavaScript, under the guidance of TOP. eval() and new Function() will not be 
-used in this project.  
+JavaScript, under the guidance of TOP.  
+eval() and new Function() will not be used in this project.  
 
 # Features Added and Test Cases
 1) Successive calculation (without AC) with different starting values  
