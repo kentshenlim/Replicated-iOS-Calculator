@@ -1,6 +1,7 @@
 # Project Description
 Web version of replicated iOS built-in calculator app, written to practice 
 JavaScript, under the guidance of TOP.  
+
 eval() and new Function() will not be used in this project.  
 
 # Features Added and Test Cases
@@ -25,7 +26,11 @@ resolved.
 that number, but return the last answer instead.  
 Key pressed: 1 + 1 = 3 =  
 Fix: When digits pressed, if the operatorArray is empty and the numberArray is
-not empty, empty the numberArray to remove the last answer.
+not empty, empty the numberArray to remove the last answer.  
+
+2) If +/- is pressed first followed by a digit, the number will start with 0.  
+Key pressed: pm 1  
+Fix: Operate only if currentDisplay != 0  
 
 # Image Credits
 icon.png: https://pnghut.com/png/RDcWqJiKEw/scientific-calculator-symbol-mathematics-logo-transparent-png
