@@ -25,6 +25,7 @@ function operate(functionName, a, b) {
 
 function updateDisplay(number) {
     const screen = document.querySelector("#screen");
+    if (number === Infinity) number = "Error";
     screen.textContent = number;
 }
 
