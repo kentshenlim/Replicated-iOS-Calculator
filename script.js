@@ -163,8 +163,11 @@ percentage.addEventListener("click", () => {
 
 const sign = document.querySelector("#sign");
 sign.addEventListener("click", () => {
-    currentDisplay = -1*currentDisplay;
-    updateDisplay(currentDisplay);
+    if (currentDisplay != 0) {
+        currentDisplay = -1*currentDisplay;
+        updateDisplay(currentDisplay);
+        check();
+    }
 })
 
 const color1And3AndEqual = document.querySelectorAll(".color1, .color3, #equal"),
