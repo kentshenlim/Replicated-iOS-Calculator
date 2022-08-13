@@ -205,6 +205,7 @@ color1And3AndEqual.forEach(button => {
 
 color2WithoutEqual.forEach(button => {
     button.addEventListener("click", () => {
+        /* color2WithoutEqual.forEach(button => button.classList.remove("clicked")); */
         button.classList.add("clicked");
     })
 });
