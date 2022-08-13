@@ -60,10 +60,17 @@ function storeNonEmptyCurrentDisplay() {
 
 
 function evaluateNow() {
-    if (numberArray.length === 1) ans = numberArray[0];
+    if (numberArray.length === 1 && !operatorSet) ans = numberArray[0];
     else {
-        const last = numberArray[numberArray.length-1];
-        const secondLast = numberArray[numberArray.length-2];
+        let last;
+        let secondLast;
+        if (operatorSet) {
+          last = lastNumber;
+          secondLast = numberArray.pop();
+        } else {
+          last = numberArray.pop();
+          secondLast = numberArray.pop();
+        }
         switch (operatorArray[operatorArray.length-1]) {
             case ('+'):
                 ans = operate(add, secondLast, last);
@@ -81,17 +88,14 @@ function evaluateNow() {
     }
     updateDisplay(fourDPIfNonInteger(ans)); // 4 dp display if not integer
     operatorArray.pop(); // This function always uses last element, so pop out after using
-    numberArray = [ans]; // Store exact value for carry-on calculations
+    numberArray.push(ans); // Store exact value for carry-on calculations
     check();
 }
 
 
 function evaluateEverythingNow() {
     while (operatorArray.length >= 1) {
-        let tempNumberArray = [...numberArray]; // Store first, don't modify numberArray
-        tempNumberArray.splice(tempNumberArray.length-2,2); // Remove the last two, store all previous numbers
         evaluateNow();
-        numberArray = tempNumberArray.concat(numberArray);
     }
 }
 
@@ -103,11 +107,13 @@ digitNextClear = false,
 evaluateNext = false,
 lastOperator, // For successive =
 lastNumber, // For successive =
+operatorSet = false,
 ans;
 
 const digits = document.querySelectorAll("button.digit"); // 0-9 and period
 digits.forEach(digit => {
     digit.addEventListener("click", () => {
+        operatorSet = false;
         currentDisplay += digit.textContent; // Concatenate numbers
         updateDisplay(currentDisplay);
         /* After a calculation completed, pressing a digit implies no longer
@@ -125,16 +131,18 @@ operators.forEach(operator => {
     operator.addEventListener("click", () => {
         storeNonEmptyCurrentDisplay();
         const clicked = operator.textContent;
+        lastOperator = clicked;
         if (evaluateNext && operatorArray.length >= 1) { // If currently not empty
-            let tempNumberArray = [...numberArray]; // Store first, don't modify numberArray
-            tempNumberArray.splice(tempNumberArray.length-2,2); // Remove the last two, store all previous numbers
             evaluateNow(); // The numberArray is now [ans]
-            numberArray = tempNumberArray.concat(numberArray); // Get back previous unused num + ans
             evaluateNext = false; // x / removed, so set back to default false
         }
         if (!operator.classList.contains("priority") && operatorArray.length >= 1) { // If in addition + or - pressed
             evaluateEverythingNow()
         } /*The first if always removes * and /, the second if triggers complete calculation if + or - pressed*/
+        if (!operatorSet && numberArray.length == 1) {
+            operatorSet = true; 
+            lastNumber = numberArray[numberArray.length - 1];
+        }
         operatorArray.push(clicked);
         evaluateNext = operator.classList.contains("priority"); // Preparing instant display
         check();
@@ -154,6 +162,7 @@ equal.addEventListener("click", () => {
     storeNonEmptyCurrentDisplay();
     evaluateEverythingNow();
     evaluateNext = false;
+    operatorSet = false;
     check();
 }); // When = pressed, always evaluate everything until operatorArray becomes empty
 
