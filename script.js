@@ -48,6 +48,7 @@ function clearAll() {
     numberArray = [];
     digitNextClear = false;
     evaluateNext = false;
+    operatorSet = false;
 }
 
 
@@ -170,7 +171,7 @@ const clc = document.querySelector("#clc");
 clc.addEventListener("click", () => {
     clearAll();
     updateDisplay(0);
-    color2WithoutEqual.forEach(ori => ori.classList.remove("clicked"))
+    color2WithoutEqual.forEach(ori => ori.classList.remove("clicked"));
     check();
 });
 
