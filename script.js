@@ -1,4 +1,5 @@
 function operate(operatorString, a, b) {
+    let calculated;
     switch (operatorString) {
         case ('+'):
             calculated = a + b;
@@ -139,7 +140,7 @@ equal.addEventListener("click", () => {
         lastOperator = operatorArray[operatorArray.length-1];
         lastNumber = currentDisplay;
     }
-    if (currentDisplay == "" && operatorArray.length == 0) {
+    if (currentDisplay == "" && operatorArray.length == 0 && lastOperator) {
         currentDisplay = lastNumber;
         operatorArray.push(lastOperator);
     } // For successive =
