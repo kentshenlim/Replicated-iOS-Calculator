@@ -1,25 +1,18 @@
-function add(a,b) {
-    return a + b;
-}
-
-
-function subtract(a,b) {
-    return a - b;
-}
-
-
-function multiply(a,b) {
-    return a*b;
-}
-
-
-function divide(a,b) {
-    return a/b;
-}
-
-
-function operate(functionName, a, b) {
-    return functionName(a,b);
+function operate(operatorString, a, b) {
+    switch (operatorString) {
+        case ('+'):
+            calculated = a + b;
+            break;
+        case ('–'):
+            calculated = a - b;
+            break;
+        case ('×'):
+            calculated = a*b;
+            break;
+        case ('÷'):
+            calculated = a/b;
+    }
+    return calculated;
 }
 
 
@@ -72,20 +65,7 @@ function evaluateNow() {
           last = numberArray.pop();
           secondLast = numberArray.pop();
         }
-        switch (operatorArray[operatorArray.length-1]) {
-            case ('+'):
-                ans = operate(add, secondLast, last);
-                break;
-            case ('–'):
-                ans = operate(subtract, secondLast, last);
-                break;
-            case ('×'):
-                ans = operate(multiply, secondLast, last);
-                break;
-            case ('÷'):
-                ans = operate(divide, secondLast, last);
-                break;
-        }
+        ans = operate(operatorArray[operatorArray.length-1], secondLast, last);
     }
     updateDisplay(fourDPIfNonInteger(ans)); // 4 dp display if not integer
     operatorArray.pop(); // This function always uses last element, so pop out after using
