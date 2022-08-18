@@ -136,6 +136,9 @@ operators.forEach(operator => {
 
 const equal = document.querySelector("#equal");
 equal.addEventListener("click", () => {
+    operators.forEach(button => {
+        button.classList.remove("clicked")
+    });
     if (currentDisplay != "" && operatorArray.length != 0) {
         lastOperator = operatorArray[operatorArray.length-1];
         lastNumber = currentDisplay;
