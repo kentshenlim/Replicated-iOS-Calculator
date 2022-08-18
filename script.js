@@ -47,10 +47,15 @@ function clearAll() {
 
 function storeNonEmptyCurrentDisplay(tempCurrentDisplay, tempNumberArray) {
     // If inputCurrentDisplay not empty, store into number array and clear
+    let tempOut;
     if (tempCurrentDisplay) { // If not empty
         tempNumberArray.push(+tempCurrentDisplay); // Store digit string as number in array
-        return ["", tempNumberArray]; // First argOut to clear the tempCurrentDisplay
+        tempOut = ["", tempNumberArray]; // First argOut to clear the tempCurrentDisplay
     }
+    else {
+        tempOut = [tempCurrentDisplay, tempNumberArray];
+    }
+    return tempOut;
 }
 
 
