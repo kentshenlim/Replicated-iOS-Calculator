@@ -1,3 +1,4 @@
+// Function declaration
 function getNewNumberArray(tempNumberArray) {
     // If inputCurrentDisplay not empty, store into number array and clear
     // Input: numberArray; output: the modified number array
@@ -85,7 +86,7 @@ function updateDisplay(number) {
 
 
 function clearAll() {
-    // Initialize calculator
+    // Initialize calculator, for AC button
     // Input and output: none
     currentDisplay = "";
     operatorArray = [];
@@ -104,6 +105,9 @@ function check() {
 }
 
 
+
+
+// Global variable initialization
 let currentDisplay = "",
 operatorArray = [],
 numberArray = [],
@@ -114,6 +118,10 @@ lastNumber, // For successive =
 operatorSet = false,
 ans;
 
+
+
+
+// Event listeners
 const digits = document.querySelectorAll("button.digit"); // 0-9 and period
 digits.forEach(digit => {
     digit.addEventListener("click", () => {
