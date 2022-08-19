@@ -46,10 +46,9 @@ function clearAll() {
 }
 
 
-function storeNonEmptyCurrentDisplay(tempNumberArray) {
+function getNewNumberArray(tempNumberArray) {
     // If inputCurrentDisplay not empty, store into number array and clear
     if (currentDisplay) { // If not empty
-        console.log(tempNumberArray);
         tempNumberArray.push(+currentDisplay); // Store digit string as number in array
     }
     return tempNumberArray;
@@ -113,7 +112,7 @@ digits.forEach(digit => {
 const operators = document.querySelectorAll("button.operator"); // + - x /
 operators.forEach(operator => {
     operator.addEventListener("click", () => {
-        numberArray = storeNonEmptyCurrentDisplay(numberArray);
+        numberArray = getNewNumberArray(numberArray);
         currentDisplay = "";
         const clicked = operator.textContent;
         lastOperator = clicked;
@@ -147,7 +146,7 @@ equal.addEventListener("click", () => {
         currentDisplay = lastNumber;
         operatorArray.push(lastOperator);
     } // For successive =
-    numberArray = storeNonEmptyCurrentDisplay(numberArray);
+    numberArray = getNewNumberArray(numberArray);
     currentDisplay = "";
     evaluateEverythingNow();
     evaluateNext = false;
