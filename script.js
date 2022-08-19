@@ -203,12 +203,16 @@ clc.addEventListener("click", () => {
     check();
 });
 
+
+// Percentage button, %
 const percentage = document.querySelector("#percentage");
 percentage.addEventListener("click", () => {
     currentDisplay /= 100;
     updateDisplay(currentDisplay);
 })
 
+
+// Sign inversion, +/-
 const sign = document.querySelector("#sign");
 sign.addEventListener("click", () => {
     if (currentDisplay != 0) {
@@ -218,6 +222,8 @@ sign.addEventListener("click", () => {
     }
 })
 
+
+// Color handling
 const color1And3AndEqual = document.querySelectorAll(".color1, .color3, #equal"),
 color3 = document.querySelectorAll(".color3"),
 color2WithoutEqual = Array.from(document.querySelectorAll(".color2"));
@@ -228,12 +234,12 @@ color1And3AndEqual.forEach(button => {
     })
     button.addEventListener("transitionend", () => {
         button.classList.remove("clicked");
-    })
+    }) // Blinking button when clicked
 });
 
 color2WithoutEqual.forEach(button => {
     button.addEventListener("click", () => {
-        /* color2WithoutEqual.forEach(button => button.classList.remove("clicked")); */
+        color2WithoutEqual.forEach(button => button.classList.remove("clicked"));
         button.classList.add("clicked");
     })
 });
