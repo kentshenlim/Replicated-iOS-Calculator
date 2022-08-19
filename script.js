@@ -24,12 +24,14 @@ function updateDisplay(number) {
 }
 
 
-function fourDPIfNonInteger(number) {
-    return Math.round(number*10**4)/10**4; // At most 4 dp
+function getFourDPIfNonInteger(number) {
+    // Return number with at most 4 d.p. without introducing dp to integers
+    return Math.round(number*10**4)/10**4;
 }
 
 
 function check() {
+    // Checker function for debugging, will be removed
     console.log(`Current display: ${currentDisplay}`);
     console.log(`Operator array: ${operatorArray}`);
     console.log(`Number array: ${numberArray}`);
@@ -37,6 +39,8 @@ function check() {
 
 
 function clearAll() {
+    // Initialize calculator
+    // Input and output: none
     currentDisplay = "";
     operatorArray = [];
     numberArray = [];
@@ -48,7 +52,7 @@ function clearAll() {
 
 function getNewNumberArray(tempNumberArray) {
     // If inputCurrentDisplay not empty, store into number array and clear
-    // Input: the numberArray; output: the modified number array
+    // Input: numberArray; output: the modified number array
     if (currentDisplay) { // If not empty
         tempNumberArray.push(+currentDisplay); // Store digit string as number in array
     }
@@ -58,7 +62,7 @@ function getNewNumberArray(tempNumberArray) {
 
 function getOneAnswer(tempNumberArray, tempOperatorArray) {
     // Evaluate expression based on sequence of keys pressed
-    // Input: numberArray and operatorArray; output: answer
+    // Input: numberArray then operatorArray; output: answer
     // getOneAnswer includes handling based on condition, not to be confused with operate
     let output;
     // Handling when = pressed with only one number having been entered
@@ -80,8 +84,9 @@ function getOneAnswer(tempNumberArray, tempOperatorArray) {
 }
 
 
-function getFinalAnswer(tempNumberArray, tempOperatorArray) {
+function getFinalAnswerAndUpdateNumOperate(tempNumberArray, tempOperatorArray) {
     // Evaluate everything, taking into account sequence of keys pressed
+    // Input and output: exactly same as getOneAnswer
     let output;
     while (tempOperatorArray.length >= 1) {
         output = getOneAnswer(tempNumberArray, tempOperatorArray);
@@ -127,14 +132,14 @@ operators.forEach(operator => {
         lastOperator = clicked;
         if (evaluateNext && operatorArray.length >= 1) { // If currently not empty
             ans = getOneAnswer(numberArray, operatorArray); // The numberArray is now [ans]
-            updateDisplay(fourDPIfNonInteger(ans)); // 4 dp display if not integer
+            updateDisplay(getFourDPIfNonInteger(ans)); // 4 dp display if not integer
             operatorArray.pop(); // This function always uses last element, so pop out after using
             numberArray.push(ans); // Store exact value for carry-on calculations
             evaluateNext = false; // x / removed, so set back to default false
         }
         if (!operator.classList.contains("priority") && operatorArray.length >= 1) { // If in addition + or - pressed
-            ans = getFinalAnswer(numberArray, operatorArray);
-            updateDisplay(fourDPIfNonInteger(ans));
+            ans = getFinalAnswerAndUpdateNumOperate(numberArray, operatorArray);
+            updateDisplay(getFourDPIfNonInteger(ans));
         } /*The first if always removes * and /, the second if triggers complete calculation if + or - pressed*/
         if (!operatorSet && numberArray.length == 1) {
             operatorSet = true; 
@@ -161,8 +166,8 @@ equal.addEventListener("click", () => {
     } // For successive =
     numberArray = getNewNumberArray(numberArray);
     currentDisplay = "";
-    ans = getFinalAnswer(numberArray, operatorArray);
-    updateDisplay(fourDPIfNonInteger(ans));
+    ans = getFinalAnswerAndUpdateNumOperate(numberArray, operatorArray);
+    updateDisplay(getFourDPIfNonInteger(ans));
     evaluateNext = false;
     operatorSet = false;
     check();
