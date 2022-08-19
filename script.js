@@ -93,6 +93,7 @@ function clearAll() {
     numberArray = [];
     evaluateNext = false;
     operatorSet = false;
+    updateDisplay(0);
 }
 
 
@@ -114,7 +115,7 @@ evaluateNext = false, // For precedence rule
 lastOperator, // For successive = after outputting answer
 lastNumber, // For successive = after outputting answer
 operatorSet = false, // For the sequence operator followed directly by =
-ans;
+ans; // Answer
 
 
 
@@ -124,7 +125,7 @@ ans;
 const digits = document.querySelectorAll("button.digit"); // 0-9 and period
 digits.forEach(digit => {
     digit.addEventListener("click", () => {
-        operatorSet = false; 
+        operatorSet = false; // Abort possibility of operator followed directly by =
         currentDisplay += digit.textContent; // Concatenate numbers
         updateDisplay(currentDisplay);
         /* After a calculation completed, pressing a digit implies no longer
@@ -137,47 +138,53 @@ digits.forEach(digit => {
     })
 });
 
-const operators = document.querySelectorAll("button.operator"); // + - x /
+
+// Operator buttons, + - x ÷
+const operators = document.querySelectorAll("button.operator");
 operators.forEach(operator => {
     operator.addEventListener("click", () => {
-        numberArray = getNewNumberArray(numberArray);
-        currentDisplay = "";
+        numberArray = getNewNumberArray(numberArray); // Update numberArray when operator pressed
+        currentDisplay = ""; // Prepare to store next number
         const clicked = operator.textContent;
-        lastOperator = clicked;
-        if (evaluateNext && operatorArray.length >= 1) { // If currently not empty
+        lastOperator = clicked; // For successive = 
+        if (evaluateNext && operatorArray.length >= 1) { // Precedence rule
             ans = getOneAnswer(numberArray, operatorArray); // The numberArray is now [ans]
-            updateDisplay(getFourDPIfNonInteger(ans)); // 4 dp display if not integer
-            operatorArray.pop(); // This function always uses last element, so pop out after using
-            numberArray.push(ans); // Store exact value for carry-on calculations
-            evaluateNext = false; // x / removed, so set back to default false
+            updateDisplay(getFourDPIfNonInteger(ans));
+            operatorArray.pop();
+            numberArray.push(ans); 
+            evaluateNext = false; // Higher precedence operator removed, so set back to default false
         }
         if (!operator.classList.contains("priority") && operatorArray.length >= 1) { // If in addition + or - pressed
             ans = getFinalAnswerAndUpdateNumOperate(numberArray, operatorArray);
             updateDisplay(getFourDPIfNonInteger(ans));
-        } /*The first if always removes * and /, the second if triggers complete calculation if + or - pressed*/
+        } // The first if always removes * and /, the second if triggers complete calculation if + or - pressed
         if (!operatorSet && numberArray.length == 1) {
             operatorSet = true; 
             lastNumber = numberArray[numberArray.length - 1];
-        }
+        } // Sequence operator followed directly by =
         operatorArray.push(clicked);
-        evaluateNext = operator.classList.contains("priority"); // Preparing instant display
+        evaluateNext = operator.classList.contains("priority"); // Preparing instant evaluation when x ÷ pressed
         check();
     })
-}); // × or ÷ followed by digits and then followed by any operator will cause instant evaluation
+}); 
+/* Precedence rule: × or ÷ followed by digits and then followed by any operator will cause instant evaluation.
+The above will always remove x and ÷. Subsequent + or - will trigger complete calculation */
 
+
+// Equal button, =
 const equal = document.querySelector("#equal");
 equal.addEventListener("click", () => {
     operators.forEach(button => {
         button.classList.remove("clicked")
-    });
+    }); // Remove color of all operator buttons every time = is pressed
     if (currentDisplay != "" && operatorArray.length != 0) {
         lastOperator = operatorArray[operatorArray.length-1];
         lastNumber = currentDisplay;
-    }
+    } // Handling for operator followed directly by =
     if (currentDisplay == "" && operatorArray.length == 0 && lastOperator) {
         currentDisplay = lastNumber;
         operatorArray.push(lastOperator);
-    } // For successive =
+    } // Handling for successive =
     numberArray = getNewNumberArray(numberArray);
     currentDisplay = "";
     ans = getFinalAnswerAndUpdateNumOperate(numberArray, operatorArray);
@@ -187,10 +194,11 @@ equal.addEventListener("click", () => {
     check();
 }); // When = pressed, always evaluate everything until operatorArray becomes empty
 
+
+// Clear button, AC
 const clc = document.querySelector("#clc");
 clc.addEventListener("click", () => {
     clearAll();
-    updateDisplay(0);
     color2WithoutEqual.forEach(ori => ori.classList.remove("clicked"));
     check();
 });
