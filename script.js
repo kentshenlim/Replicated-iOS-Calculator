@@ -1,4 +1,8 @@
-function operate(operatorString, a, b) {
+function getBinaryOperationAnswer(operatorString, a, b) {
+    // Calculate answer for binary operation
+    // Input: string specifying type of operation, then first and second operand
+    // Output: answer for that binary operation
+    // Does not take into account sequence of keys pressed
     let calculated;
     switch (operatorString) {
         case ('+'):
@@ -18,6 +22,8 @@ function operate(operatorString, a, b) {
 
 
 function updateDisplay(number) {
+    // Update display
+    // Input: new content; output: none
     const screen = document.querySelector("#screen");
     if (number === Infinity) number = "Error";
     screen.textContent = number;
@@ -25,7 +31,8 @@ function updateDisplay(number) {
 
 
 function getFourDPIfNonInteger(number) {
-    // Return number with at most 4 d.p. without introducing dp to integers
+    // Return number with at most 4 d.p. without introducing d.p. to integers
+    // Input: any number; output: number with at most 4 d.p.
     return Math.round(number*10**4)/10**4;
 }
 
@@ -77,7 +84,7 @@ function getOneAnswer(tempNumberArray, tempOperatorArray) {
           last = tempNumberArray.pop();
           secondLast = tempNumberArray.pop(); 
         }
-        output = operate(tempOperatorArray[tempOperatorArray.length-1], secondLast, last);
+        output = getBinaryOperationAnswer(tempOperatorArray[tempOperatorArray.length-1], secondLast, last);
     }
     check();
     return output;
