@@ -37,9 +37,9 @@ Fix: Operate only if currentDisplay != 0
 icon.png: https://pnghut.com/png/RDcWqJiKEw/scientific-calculator-symbol-mathematics-logo-transparent-png
 
 # Coming features
-- [] One number followed by = will output NaN  
-- [] Handling of +/- first followed by digits  
-- [] Exact action of AC button, including changing of text content into C  
-- [] Output auto-wrapping  
-- [] Auto-conversion of too small or too big numbers into scientific notation    
-- [] Difference in color change during holding and tapping  
+- [ ] One number followed by = will output NaN  
+- [ ] Handling of +/- first followed by digits  
+- [ ] Exact action of AC button, including changing of text content into C  
+- [ ] Output auto-wrapping  
+- [ ] Auto-conversion of too small or too big numbers into scientific notation    
+- [ ] Difference in color change during holding and tapping  
