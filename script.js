@@ -57,8 +57,9 @@ function getNewNumberArray(tempNumberArray) {
 
 
 function getOneAnswer(tempNumberArray, tempOperatorArray) {
-    // Evaluate expression based on keys pressed
+    // Evaluate expression based on sequence of keys pressed
     // Input: numberArray and operatorArray; output: answer
+    // getOneAnswer includes handling based on condition, not to be confused with operate
     let output;
     // Handling when = pressed with only one number having been entered
     if (tempNumberArray.length === 1 && !operatorSet) output = tempNumberArray[0];
@@ -79,13 +80,15 @@ function getOneAnswer(tempNumberArray, tempOperatorArray) {
 }
 
 
-function evaluateEverythingNow() {
-    while (operatorArray.length >= 1) {
-        ans = getOneAnswer(numberArray, operatorArray);
-        updateDisplay(fourDPIfNonInteger(ans)); // 4 dp display if not integer
-        operatorArray.pop(); // This function always uses last element, so pop out after using
-        numberArray.push(ans); // Store exact value for carry-on calculations
+function getFinalAnswer(tempNumberArray, tempOperatorArray) {
+    // Evaluate everything, taking into account sequence of keys pressed
+    let output;
+    while (tempOperatorArray.length >= 1) {
+        output = getOneAnswer(tempNumberArray, tempOperatorArray);
+        tempOperatorArray.pop(); // The getOneAnswer always uses last element, so pop out after using
+        tempNumberArray.push(output); // Store exact value for carry-on calculations
     }
+    return output;
 }
 
 
@@ -130,7 +133,8 @@ operators.forEach(operator => {
             evaluateNext = false; // x / removed, so set back to default false
         }
         if (!operator.classList.contains("priority") && operatorArray.length >= 1) { // If in addition + or - pressed
-            evaluateEverythingNow()
+            ans = getFinalAnswer(numberArray, operatorArray);
+            updateDisplay(fourDPIfNonInteger(ans));
         } /*The first if always removes * and /, the second if triggers complete calculation if + or - pressed*/
         if (!operatorSet && numberArray.length == 1) {
             operatorSet = true; 
@@ -157,7 +161,8 @@ equal.addEventListener("click", () => {
     } // For successive =
     numberArray = getNewNumberArray(numberArray);
     currentDisplay = "";
-    evaluateEverythingNow();
+    ans = getFinalAnswer(numberArray, operatorArray);
+    updateDisplay(fourDPIfNonInteger(ans));
     evaluateNext = false;
     operatorSet = false;
     check();
