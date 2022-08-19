@@ -48,6 +48,7 @@ function clearAll() {
 
 function getNewNumberArray(tempNumberArray) {
     // If inputCurrentDisplay not empty, store into number array and clear
+    // Input: the numberArray; output: the modified number array
     if (currentDisplay) { // If not empty
         tempNumberArray.push(+currentDisplay); // Store digit string as number in array
     }
@@ -55,30 +56,35 @@ function getNewNumberArray(tempNumberArray) {
 }
 
 
-function evaluateNow() {
-    if (numberArray.length === 1 && !operatorSet) ans = numberArray[0];
+function getOneAnswer(tempNumberArray, tempOperatorArray) {
+    // Evaluate expression based on keys pressed
+    // Input: numberArray and operatorArray; output: answer
+    let output;
+    // Handling when = pressed with only one number having been entered
+    if (tempNumberArray.length === 1 && !operatorSet) output = tempNumberArray[0];
     else {
         let last;
         let secondLast;
-        if (operatorSet) {
+        if (operatorSet) { // Handing for operator followed by successive =
           last = lastNumber;
-          secondLast = numberArray.pop();
-        } else {
-          last = numberArray.pop();
-          secondLast = numberArray.pop();
+          secondLast = tempNumberArray.pop();
+        } else { // Handling for normal binary operation
+          last = tempNumberArray.pop();
+          secondLast = tempNumberArray.pop(); 
         }
-        ans = operate(operatorArray[operatorArray.length-1], secondLast, last);
+        output = operate(tempOperatorArray[tempOperatorArray.length-1], secondLast, last);
     }
-    updateDisplay(fourDPIfNonInteger(ans)); // 4 dp display if not integer
-    operatorArray.pop(); // This function always uses last element, so pop out after using
-    numberArray.push(ans); // Store exact value for carry-on calculations
     check();
+    return output;
 }
 
 
 function evaluateEverythingNow() {
     while (operatorArray.length >= 1) {
-        evaluateNow();
+        ans = getOneAnswer(numberArray, operatorArray);
+        updateDisplay(fourDPIfNonInteger(ans)); // 4 dp display if not integer
+        operatorArray.pop(); // This function always uses last element, so pop out after using
+        numberArray.push(ans); // Store exact value for carry-on calculations
     }
 }
 
@@ -117,7 +123,10 @@ operators.forEach(operator => {
         const clicked = operator.textContent;
         lastOperator = clicked;
         if (evaluateNext && operatorArray.length >= 1) { // If currently not empty
-            evaluateNow(); // The numberArray is now [ans]
+            ans = getOneAnswer(numberArray, operatorArray); // The numberArray is now [ans]
+            updateDisplay(fourDPIfNonInteger(ans)); // 4 dp display if not integer
+            operatorArray.pop(); // This function always uses last element, so pop out after using
+            numberArray.push(ans); // Store exact value for carry-on calculations
             evaluateNext = false; // x / removed, so set back to default false
         }
         if (!operator.classList.contains("priority") && operatorArray.length >= 1) { // If in addition + or - pressed
