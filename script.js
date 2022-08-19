@@ -1,62 +1,3 @@
-function getBinaryOperationAnswer(operatorString, a, b) {
-    // Calculate answer for binary operation
-    // Input: string specifying type of operation, then first and second operand
-    // Output: answer for that binary operation
-    // Does not take into account sequence of keys pressed
-    let calculated;
-    switch (operatorString) {
-        case ('+'):
-            calculated = a + b;
-            break;
-        case ('–'):
-            calculated = a - b;
-            break;
-        case ('×'):
-            calculated = a*b;
-            break;
-        case ('÷'):
-            calculated = a/b;
-    }
-    return calculated;
-}
-
-
-function updateDisplay(number) {
-    // Update display
-    // Input: new content; output: none
-    const screen = document.querySelector("#screen");
-    if (number === Infinity) number = "Error";
-    screen.textContent = number;
-}
-
-
-function getFourDPIfNonInteger(number) {
-    // Return number with at most 4 d.p. without introducing d.p. to integers
-    // Input: any number; output: number with at most 4 d.p.
-    return Math.round(number*10**4)/10**4;
-}
-
-
-function check() {
-    // Checker function for debugging, will be removed
-    console.log(`Current display: ${currentDisplay}`);
-    console.log(`Operator array: ${operatorArray}`);
-    console.log(`Number array: ${numberArray}`);
-}
-
-
-function clearAll() {
-    // Initialize calculator
-    // Input and output: none
-    currentDisplay = "";
-    operatorArray = [];
-    numberArray = [];
-    digitNextClear = false;
-    evaluateNext = false;
-    operatorSet = false;
-}
-
-
 function getNewNumberArray(tempNumberArray) {
     // If inputCurrentDisplay not empty, store into number array and clear
     // Input: numberArray; output: the modified number array
@@ -64,6 +5,29 @@ function getNewNumberArray(tempNumberArray) {
         tempNumberArray.push(+currentDisplay); // Store digit string as number in array
     }
     return tempNumberArray;
+}
+
+
+function getBinaryOperationAnswer(operatorString, a, b) {
+    // Calculate answer for binary operation
+    // Input: string specifying type of operation, then first and second operand
+    // Output: answer for that binary operation
+    // Does not take into account sequence of keys pressed
+    let output;
+    switch (operatorString) {
+        case ('+'):
+            output = a + b;
+            break;
+        case ('–'):
+            output = a - b;
+            break;
+        case ('×'):
+            output = a*b;
+            break;
+        case ('÷'):
+            output = a/b;
+    }
+    return output;
 }
 
 
@@ -101,6 +65,42 @@ function getFinalAnswerAndUpdateNumOperate(tempNumberArray, tempOperatorArray) {
         tempNumberArray.push(output); // Store exact value for carry-on calculations
     }
     return output;
+}
+
+
+function getFourDPIfNonInteger(number) {
+    // Return number with at most 4 d.p. without introducing d.p. to integers
+    // Input: any number; output: number with at most 4 d.p.
+    return Math.round(number*10**4)/10**4;
+}
+
+
+function updateDisplay(number) {
+    // Update display
+    // Input: new content; output: none
+    const screen = document.querySelector("#screen");
+    if (number === Infinity) number = "Error";
+    screen.textContent = number;
+}
+
+
+function clearAll() {
+    // Initialize calculator
+    // Input and output: none
+    currentDisplay = "";
+    operatorArray = [];
+    numberArray = [];
+    digitNextClear = false;
+    evaluateNext = false;
+    operatorSet = false;
+}
+
+
+function check() {
+    // Checker function for debugging, will be removed
+    console.log(`Current display: ${currentDisplay}`);
+    console.log(`Operator array: ${operatorArray}`);
+    console.log(`Number array: ${numberArray}`);
 }
 
 
