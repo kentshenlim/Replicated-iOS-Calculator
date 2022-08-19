@@ -1,6 +1,7 @@
 # Project Description
 Web version of replicated iOS built-in calculator app, written to practice 
-JavaScript, under the guidance of TOP.  
+JavaScript, under the guidance of TOP. Only the vertical-screen mode of the App
+will be written.   
 
 eval() and new Function() will not be used in this project.  
 
@@ -34,3 +35,11 @@ Fix: Operate only if currentDisplay != 0
 
 # Image Credits
 icon.png: https://pnghut.com/png/RDcWqJiKEw/scientific-calculator-symbol-mathematics-logo-transparent-png
+
+# Coming features
+- [] One number followed by = will output NaN  
+- [] Handling of +/- first followed by digits  
+- [] Exact action of AC button, including changing of text content into C  
+- [] Output auto-wrapping  
+- [] Auto-conversion of too small or too big numbers into scientific notation    
+- [] Difference in color change during holding and tapping  
