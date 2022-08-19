@@ -91,7 +91,6 @@ function clearAll() {
     currentDisplay = "";
     operatorArray = [];
     numberArray = [];
-    digitNextClear = false;
     evaluateNext = false;
     operatorSet = false;
 }
@@ -111,21 +110,21 @@ function check() {
 let currentDisplay = "",
 operatorArray = [],
 numberArray = [],
-digitNextClear = false,
-evaluateNext = false,
-lastOperator, // For successive =
-lastNumber, // For successive =
-operatorSet = false,
+evaluateNext = false, // For precedence rule
+lastOperator, // For successive = after outputting answer
+lastNumber, // For successive = after outputting answer
+operatorSet = false, // For the sequence operator followed directly by =
 ans;
 
 
 
 
 // Event listeners
+// Digit buttons
 const digits = document.querySelectorAll("button.digit"); // 0-9 and period
 digits.forEach(digit => {
     digit.addEventListener("click", () => {
-        operatorSet = false;
+        operatorSet = false; 
         currentDisplay += digit.textContent; // Concatenate numbers
         updateDisplay(currentDisplay);
         /* After a calculation completed, pressing a digit implies no longer
