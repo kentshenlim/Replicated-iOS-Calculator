@@ -43,4 +43,4 @@ icon.png: https://pnghut.com/png/RDcWqJiKEw/scientific-calculator-symbol-mathema
 - [ ] Output auto-wrapping  
 - [ ] Auto-conversion of too small or too big numbers into scientific notation    
 - [ ] Difference in color change during holding and tapping  
-- [ ] Stop user from entering more than one period  
+- [x] Stop user from entering more than one period  

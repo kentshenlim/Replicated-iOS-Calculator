@@ -138,8 +138,11 @@ digits.forEach(digit => {
 const period = document.querySelector("#period");
 period.addEventListener("click", () => {
     if (currentDisplay.split(".").length == 3) currentDisplay = currentDisplay.slice(0, this.length-1);
+    // If there are two periods, .split will break string into three. Remove the last period.
+    if (currentDisplay === ".") currentDisplay = "0.";
+    // Padding start with 0, so the display never be something like ".3, .7"
     updateDisplay(currentDisplay);
-}) // If there are two periods, .split will break string into three. Remove the last period.
+})
 
 
 // Operator buttons, + - x ÷
