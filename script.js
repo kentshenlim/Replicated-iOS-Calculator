@@ -52,11 +52,14 @@ function getFinalAnswerAndUpdateNumOperate(tempNumberArray, tempOperatorArray) {
     // Evaluate everything, taking into account sequence of keys pressed
     // Input and output: exactly same as getOneAnswer
     let output;
-    while (tempOperatorArray.length >= 1) {
-        output = getOneAnswer(tempNumberArray, tempOperatorArray);
-        tempOperatorArray.pop(); // The getOneAnswer always uses last element, so pop out after using
-        tempNumberArray.push(output); // Store exact value for carry-on calculations
-    }
+    if (numberArray.length == 1 && operatorArray.length == 0) output = numberArray[numberArray.length-1]
+    else {
+        while (tempOperatorArray.length >= 1) {
+            output = getOneAnswer(tempNumberArray, tempOperatorArray);
+            tempOperatorArray.pop(); // The getOneAnswer always uses last element, so pop out after using
+            tempNumberArray.push(output); // Store exact value for carry-on calculations
+        }
+    }   
     return output;
 }
 

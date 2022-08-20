@@ -37,7 +37,7 @@ Fix: Operate only if currentDisplay `!= 0`
 icon.png: https://pnghut.com/png/RDcWqJiKEw/scientific-calculator-symbol-mathematics-logo-transparent-png
 
 # Coming Features
-- [ ] One `number` followed by `=` will output `NaN`  
+- [x] One `number` followed by `=` will output `NaN`  
 - [ ] Handling of `+/-` first followed by `digits`  
 - [ ] Exact action of `AC` button, including changing of text content into `C`  
 - [ ] Output auto-wrapping  
