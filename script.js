@@ -14,21 +14,16 @@ function getBinaryOperationAnswer(operatorString, a, b) {
     // Input: string specifying type of operation, then first and second operand
     // Output: answer for that binary operation
     // Does not take into account sequence of keys pressed
-    let output;
     switch (operatorString) {
         case ('+'):
-            output = a + b;
-            break;
+            return a + b;
         case ('–'):
-            output = a - b;
-            break;
+            return a - b;
         case ('×'):
-            output = a*b;
-            break;
+            return a*b;
         case ('÷'):
-            output = a/b;
+            return a/b;
     }
-    return output;
 }
 
 
@@ -36,9 +31,8 @@ function getOneAnswer(tempNumberArray, tempOperatorArray) {
     // Evaluate expression based on sequence of keys pressed
     // Input: numberArray then operatorArray; output: answer
     // getOneAnswer includes handling based on condition, not to be confused with operate
-    let output;
     // Handling when = pressed with only one number having been entered
-    if (tempNumberArray.length === 1 && !operatorSet) output = tempNumberArray[0];
+    if (tempNumberArray.length === 1 && !operatorSet) return tempNumberArray[0];
     else {
         let last;
         let secondLast;
@@ -49,10 +43,8 @@ function getOneAnswer(tempNumberArray, tempOperatorArray) {
           last = tempNumberArray.pop();
           secondLast = tempNumberArray.pop(); 
         }
-        output = getBinaryOperationAnswer(tempOperatorArray[tempOperatorArray.length-1], secondLast, last);
+        return getBinaryOperationAnswer(tempOperatorArray[tempOperatorArray.length-1], secondLast, last);
     }
-    check();
-    return output;
 }
 
 
