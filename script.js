@@ -226,7 +226,7 @@ const sign = document.querySelector("#sign");
 sign.addEventListener("click", () => {
     if (!currentDisplay && numberArray.length == 0 && operatorArray.length == 0 || currentDisplay === "0") {
         currentDisplay = "-0";
-    } // When +/- pressed at the beginning, or when previous answer is 0
+    } // When +/- pressed at the beginning is 0
     else if (currentDisplay === "-0") {
         currentDisplay = "0";
     } // When +/- pressed again at the beginning
@@ -236,7 +236,7 @@ sign.addEventListener("click", () => {
     } // For inversion of previous answer, extract the previous answer out from number array, invert the sign
     else if (operatorArray.length > 0) {
         currentDisplay = "-0";
-    }
+    } // For +/- after an operator
     else {
         currentDisplay = String(-1*currentDisplay);
     }
