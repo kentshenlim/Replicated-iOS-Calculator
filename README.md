@@ -20,7 +20,18 @@ Key pressed: `2 + 5 * 3 =`
 Must return `17` but not `13`  
 Key pressed: `2 + 5 * 3 - 2 + 5 * 11 =`  
 Must return `70`. Result will be evaluated as soon as precedence rule can be 
-resolved.
+resolved.  
+4) `+/-`  
+Key pressed: `+/- 1`  
+At the beginning, when pressed should output `-0` then becomes `-1`  
+Key pressed: `5 - 5 = +/-`  
+Expect `-0`  
+Key pressed: `1 +/- + 2`  
+Output `-1` then `1`  
+Key pressed: `1 + 2 = +/-`  
+Output `-3`  
+Key pressed: `1 + +/- 2 =`  
+Must not turn the `1` into `-1`  
 
 # Bug Fixed
 1) After some calculations, with one number entered, pressing `=` will not return
@@ -36,11 +47,13 @@ Fix: Operate only if currentDisplay `!= 0`
 # Image Credits
 icon.png: https://pnghut.com/png/RDcWqJiKEw/scientific-calculator-symbol-mathematics-logo-transparent-png
 
-# Coming Features
+# Upcoming Features
 - [x] One `number` followed by `=` will output `NaN`  
-- [ ] Handling of `+/-` first followed by `digits`  
+- [x] Handling of `+/-` first followed by `digits`  
 - [ ] Exact action of `AC` button, including changing of text content into `C`  
 - [ ] Output auto-wrapping  
 - [ ] Auto-conversion of too small or too big numbers into scientific notation    
 - [ ] Difference in color change during holding and tapping  
 - [x] Stop user from entering more than one period  
+- [x] Handling of `+/-` after `operators`  
+- [ ] Handling of `=` and `+/-` at the beginning  

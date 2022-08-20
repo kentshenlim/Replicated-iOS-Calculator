@@ -121,6 +121,9 @@ const digits = document.querySelectorAll("button.digit"); // 0-9 and period
 digits.forEach(digit => {
     digit.addEventListener("click", () => {
         operatorSet = false; // Abort possibility of operator followed directly by =
+        if (currentDisplay === "0" || currentDisplay === "-0") {
+            currentDisplay = currentDisplay.replace("0", "");
+        } // Never start display with 0, unless decimal
         currentDisplay += digit.textContent; // Concatenate numbers
         updateDisplay(currentDisplay);
         /* After a calculation completed, pressing a digit implies no longer
@@ -221,11 +224,24 @@ percentage.addEventListener("click", () => {
 // Sign inversion, +/-
 const sign = document.querySelector("#sign");
 sign.addEventListener("click", () => {
-    if (currentDisplay != 0) {
-        currentDisplay = -1*currentDisplay;
-        updateDisplay(currentDisplay);
-        check();
+    if (!currentDisplay && numberArray.length == 0 && operatorArray.length == 0 || currentDisplay === "0") {
+        currentDisplay = "-0";
+    } // When +/- pressed at the beginning, or when previous answer is 0
+    else if (currentDisplay === "-0") {
+        currentDisplay = "0";
+    } // When +/- pressed again at the beginning
+    else if (!currentDisplay && numberArray.length > 0 && operatorArray.length == 0) {
+        currentDisplay = "-".concat(String(numberArray[numberArray.length-1]));
+        numberArray.pop();
+    } // For inversion of previous answer, extract the previous answer out from number array, invert the sign
+    else if (operatorArray.length > 0) {
+        currentDisplay = "-0";
     }
+    else {
+        currentDisplay = String(-1*currentDisplay);
+    }
+    updateDisplay(currentDisplay);
+    check();
 })
 
 
