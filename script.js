@@ -64,10 +64,10 @@ function getFinalAnswerAndUpdateNumOperate(tempNumberArray, tempOperatorArray) {
 }
 
 
-function getFourDPIfNonInteger(number) {
-    // Return number with at most 4 d.p. without introducing d.p. to integers
-    // Input: any number; output: number with at most 4 d.p.
-    return Math.round(number*10**4)/10**4;
+function getNDPIfNonInteger(number, N) {
+    // Return number with at most N DP without introducing DP to integers
+    // Input: any number, then number of DP; output: number with at most 4 DP
+    return Math.round(number*10**N)/10**N;
 }
 
 
@@ -76,12 +76,19 @@ function getAtMostNineDigitsAndEForCalculated(number) {
     // Period and comma excluded
     // Input: any number for calculated output; output: trim unwanted dp
     // For while keying in
-    if (number > 1e9) number = number.toExponential().replace("+", "");
-    else if (number < 1e-9) number = number.toExponential();
-    let frontPart = number.split("e")[1];
-    console.log(frontPart);
-    return String(number).includes("e");
-    return String(number).replace(/[^0-9]/g, "").length;
+    if (number > 1e9 || number < 1e-9) {
+        number = number.toExponential().replace("+", "");
+        let frontPart = number.split("e")[0],
+        exponentialPart = number.split("e")[1],
+        placesForFrontPart = 9 - 1 - exponentialPart.length;
+        if (frontPart.length - placesForFrontPart > 0) {
+            let beforeDecimal = frontPart.split(".")[0],
+            supposedDP = placesForFrontPart - beforeDecimal.length;
+            frontPart = getNDPIfNonInteger(frontPart, supposedDP);
+        }
+        return frontPart + "e" + exponentialPart;
+    }
+    else return number;
 }
 
 
@@ -182,14 +189,14 @@ operators.forEach(operator => {
         lastOperator = clicked; // For successive = 
         if (evaluateNext && operatorArray.length >= 1) { // Precedence rule
             ans = getOneAnswer(numberArray, operatorArray); // The numberArray is now [ans]
-            updateDisplay(getFourDPIfNonInteger(ans));
+            updateDisplay(getAtMostNineDigitsAndEForCalculated(ans));
             operatorArray.pop();
             numberArray.push(ans); 
             evaluateNext = false; // Higher precedence operator removed, so set back to default false
         }
         if (!operator.classList.contains("priority") && operatorArray.length >= 1) { // If in addition + or - pressed
             ans = getFinalAnswerAndUpdateNumOperate(numberArray, operatorArray);
-            updateDisplay(getFourDPIfNonInteger(ans));
+            updateDisplay(getAtMostNineDigitsAndEForCalculated(ans));
         } // The first if always removes * and /, the second if triggers complete calculation if + or - pressed
         if (!operatorSet && numberArray.length == 1) {
             operatorSet = true; 
@@ -221,7 +228,7 @@ equal.addEventListener("click", () => {
     numberArray = getNewNumberArray(numberArray);
     currentDisplay = "";
     ans = getFinalAnswerAndUpdateNumOperate(numberArray, operatorArray);
-    updateDisplay(getFourDPIfNonInteger(ans));
+    updateDisplay(getAtMostNineDigitsAndEForCalculated(ans));
     evaluateNext = false;
     operatorSet = false;
     check();
