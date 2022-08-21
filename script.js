@@ -76,8 +76,6 @@ function getAtMostNineDigitsAndEForCalculated(number) {
     // Period and comma excluded
     // Input: any number for calculated output; output: trim unwanted dp
     // For while keying in
-
-    
     if (number > 1e9 || number < 1e-9) {
         number = number.toExponential().replace("+", "");
         let frontPart = number.split("e")[0],
@@ -100,7 +98,7 @@ function getAtMostNineDigitsAndEForCalculated(number) {
 }
 
 
-function updateDisplay(number) {
+function padCommaAndUpdateDisplay(number) {
     // Update display, padding comma if necessary
     // Input: new content; output: none
     const screen = document.querySelector("#screen");
@@ -125,7 +123,7 @@ function clearAll() {
     numberArray = [];
     evaluateNext = false;
     operatorSet = false;
-    updateDisplay(0);
+    padCommaAndUpdateDisplay(0);
 }
 
 
@@ -163,7 +161,7 @@ digits.forEach(digit => {
                     currentDisplay = currentDisplay.replace("0", "");
                 } // Never start display with 0, unless decimal
                 currentDisplay += digit.textContent; // Concatenate numbers
-                updateDisplay(currentDisplay);
+                padCommaAndUpdateDisplay(currentDisplay);
                 /* After a calculation completed, pressing a digit implies no longer
                 interested in current answer, so can abort.
                 */
@@ -183,7 +181,7 @@ period.addEventListener("click", () => {
     // If there are two periods, .split will break string into three. Remove the last period.
     if (currentDisplay === ".") currentDisplay = "0.";
     // Padding start with 0, so the display never be something like ".3, .7"
-    updateDisplay(currentDisplay);
+    padCommaAndUpdateDisplay(currentDisplay);
 })
 
 
@@ -197,14 +195,14 @@ operators.forEach(operator => {
         lastOperator = clicked; // For successive = 
         if (evaluateNext && operatorArray.length >= 1) { // Precedence rule
             ans = getOneAnswer(numberArray, operatorArray); // The numberArray is now [ans]
-            updateDisplay(getAtMostNineDigitsAndEForCalculated(ans));
+            padCommaAndUpdateDisplay(getAtMostNineDigitsAndEForCalculated(ans));
             operatorArray.pop();
             numberArray.push(ans); 
             evaluateNext = false; // Higher precedence operator removed, so set back to default false
         }
         if (!operator.classList.contains("priority") && operatorArray.length >= 1) { // If in addition + or - pressed
             ans = getFinalAnswerAndUpdateNumOperate(numberArray, operatorArray);
-            updateDisplay(getAtMostNineDigitsAndEForCalculated(ans));
+            padCommaAndUpdateDisplay(getAtMostNineDigitsAndEForCalculated(ans));
         } // The first if always removes * and /, the second if triggers complete calculation if + or - pressed
         if (!operatorSet && numberArray.length == 1) {
             operatorSet = true; 
@@ -236,7 +234,7 @@ equal.addEventListener("click", () => {
     numberArray = getNewNumberArray(numberArray);
     currentDisplay = "";
     ans = getFinalAnswerAndUpdateNumOperate(numberArray, operatorArray);
-    updateDisplay(getAtMostNineDigitsAndEForCalculated(ans));
+    padCommaAndUpdateDisplay(getAtMostNineDigitsAndEForCalculated(ans));
     evaluateNext = false;
     operatorSet = false;
     check();
@@ -256,7 +254,7 @@ clc.addEventListener("click", () => {
 const percentage = document.querySelector("#percentage");
 percentage.addEventListener("click", () => {
     currentDisplay /= 100;
-    updateDisplay(currentDisplay);
+    padCommaAndUpdateDisplay(currentDisplay);
 })
 
 
@@ -279,7 +277,7 @@ sign.addEventListener("click", () => {
     else {
         currentDisplay = String(-1*currentDisplay);
     }
-    updateDisplay(currentDisplay);
+    padCommaAndUpdateDisplay(currentDisplay);
     check();
 })
 
