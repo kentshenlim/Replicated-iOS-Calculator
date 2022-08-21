@@ -118,7 +118,7 @@ body>.calculator-panel {
 
 
 .calculator-panel>.output>p {
-    color: red;
+    color: #ffffff;
     font-size: calc(24px + 2rem);
     position: absolute;
     bottom: 0;

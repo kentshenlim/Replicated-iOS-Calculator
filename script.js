@@ -76,7 +76,7 @@ function getAtMostNineDigitsAndEForCalculated(number) {
     // Period and comma excluded
     // Input: any number for calculated output; output: trim unwanted dp
     // For while keying in
-    if (number > 1e9 || number < 1e-9) {
+    if (number > 1e9 || number < 9e-9) {
         number = number.toExponential().replace("+", "");
         let frontPart = number.split("e")[0],
         exponentialPart = number.split("e")[1],
