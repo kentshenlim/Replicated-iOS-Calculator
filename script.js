@@ -71,22 +71,33 @@ function getFourDPIfNonInteger(number) {
 }
 
 
+function getAtMostNineDigitsAndEForCalculated(number) {
+    // Return decimals with at most nine digits, char e in exponential included
+    // Period and comma excluded
+    // Input: any number for calculated output; output: trim unwanted dp
+    // For while keying in
+    if (number > 1e9) number = number.toExponential().replace("+", "");
+    else if (number < 1e-9) number = number.toExponential();
+    let frontPart = number.split("e")[1];
+    console.log(frontPart);
+    return String(number).includes("e");
+    return String(number).replace(/[^0-9]/g, "").length;
+}
+
+
 function updateDisplay(number) {
     // Update display
     // Input: new content; output: none
     const screen = document.querySelector("#screen");
     if (number === Infinity) number = "Error";
-    else if (String(number).length > 3 && String(number).length <= 9) { // Add commas
-        console.log(String(number).length);
+    else if (number >= 1000 && String(number).length > 3 && String(number).length <= 9) { // Add commas
         number = String(number);
         let i = number.length-3;
         while (i > 0) {
             number = number.slice(0,i) + "," + number.slice(i);
             i -= 3;
         }
-    }
-    else if (number > 1e9) number = number.toExponential().replace("+", "");
-    else if (number < 1e-9) number = number.toExponential();
+    } 
     screen.textContent = number;
 }
 
@@ -132,7 +143,7 @@ const digits = document.querySelectorAll("button.digit"); // 0-9 and period
 digits.forEach(digit => {
     digit.addEventListener("click", () => {
         operatorSet = false; // Abort possibility of operator followed directly by =
-            if (currentDisplay.length < 9) {
+            if (currentDisplay.length < 9) { // While keying digits allow only at most 9
                 if (currentDisplay === "0" || currentDisplay === "-0") {
                     currentDisplay = currentDisplay.replace("0", "");
                 } // Never start display with 0, unless decimal
