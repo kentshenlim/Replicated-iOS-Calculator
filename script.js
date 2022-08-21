@@ -76,6 +76,15 @@ function updateDisplay(number) {
     // Input: new content; output: none
     const screen = document.querySelector("#screen");
     if (number === Infinity) number = "Error";
+    else if (String(number).length > 3) {
+        console.log(String(number).length);
+        number = String(number);
+        let i = number.length-3;
+        while (i > 0) {
+            number = number.slice(0,i) + "," + number.slice(i);
+            i -= 3;
+        }
+    }
     screen.textContent = number;
 }
 
