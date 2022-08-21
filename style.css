@@ -46,6 +46,7 @@ body>.calculator-panel {
     flex: 1 1 auto;
     position: relative;
     padding: 0;
+    border: red 3px solid;
 }
 
 
@@ -117,7 +118,7 @@ body>.calculator-panel {
 
 
 .calculator-panel>.output>p {
-    color: #ffffff;
+    color: red;
     font-size: calc(24px + 2rem);
     position: absolute;
     bottom: 0;

@@ -76,7 +76,7 @@ function updateDisplay(number) {
     // Input: new content; output: none
     const screen = document.querySelector("#screen");
     if (number === Infinity) number = "Error";
-    else if (String(number).length > 3) {
+    else if (String(number).length > 3 && String(number).length <= 9) { // Add commas
         console.log(String(number).length);
         number = String(number);
         let i = number.length-3;
@@ -85,6 +85,8 @@ function updateDisplay(number) {
             i -= 3;
         }
     }
+    else if (number > 1e9) number = number.toExponential().replace("+", "");
+    else if (number < 1e-9) number = number.toExponential();
     screen.textContent = number;
 }
 
