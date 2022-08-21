@@ -73,16 +73,16 @@ function getNDPIfNonInteger(number, N) {
 
 function getAtMostNineDigitsAndEForCalculated(number) {
     // Return decimals with at most nine digits, char e in exponential included
-    // Period and comma excluded
+    // Period, comma, negative sign, negative exponential excluded
     // Input: any number for calculated output; output: trim unwanted dp
     // For while keying in
-    /* if (Math.abs(number) > 9e160 || Math.abs(number) < 1e-91) return "extreme"; */
     if (Math.abs(number) > 1e9 || Math.abs(number) < 9e-9 && !Number.isInteger(number)) {
         number = number.toExponential().replace("+", "");
         let frontPart = number.split("e")[0],
         exponentialPart = number.split("e")[1],
         placesForFrontPart = 9 - 1 - exponentialPart.length;
-        if (frontPart.length - placesForFrontPart > 0) {
+        if (parseInt(exponentialPart) > 160 || parseInt(exponentialPart) < -91) return "extreme";
+        else if (frontPart.length - placesForFrontPart > 0) {
             let beforeDecimal = frontPart.split(".")[0],
             supposedDP = placesForFrontPart - beforeDecimal.length;
             if (number < 1e-9) supposedDP += 1;
