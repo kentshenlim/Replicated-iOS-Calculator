@@ -76,6 +76,8 @@ function getAtMostNineDigitsAndEForCalculated(number) {
     // Period and comma excluded
     // Input: any number for calculated output; output: trim unwanted dp
     // For while keying in
+
+    
     if (number > 1e9 || number < 1e-9) {
         number = number.toExponential().replace("+", "");
         let frontPart = number.split("e")[0],
@@ -87,6 +89,11 @@ function getAtMostNineDigitsAndEForCalculated(number) {
             frontPart = getNDPIfNonInteger(frontPart, supposedDP);
         }
         return frontPart + "e" + exponentialPart;
+    }
+    else if (String(number).length > 9) {
+        let beforeDecimal = String(number).split(".")[0],
+        supposedDP = 9 - beforeDecimal.length;
+        return getNDPIfNonInteger(number, supposedDP);
     }
     else return number;
 }
