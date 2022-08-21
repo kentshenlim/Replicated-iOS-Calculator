@@ -86,6 +86,7 @@ function getAtMostNineDigitsAndEForCalculated(number) {
         if (frontPart.length - placesForFrontPart > 0) {
             let beforeDecimal = frontPart.split(".")[0],
             supposedDP = placesForFrontPart - beforeDecimal.length;
+            if (number < 1e-9) supposedDP -= 1; // One taken for - in negative exponential
             frontPart = getNDPIfNonInteger(frontPart, supposedDP);
         }
         return frontPart + "e" + exponentialPart;
