@@ -93,11 +93,11 @@ function getAtMostNineDigitsAndEForCalculated(number) {
 
 
 function updateDisplay(number) {
-    // Update display
+    // Update display, padding comma if necessary
     // Input: new content; output: none
     const screen = document.querySelector("#screen");
     if (number === Infinity) number = "Error";
-    else if (number >= 1000 && String(number).length > 3 && String(number).length <= 9) { // Add commas
+    else if (!String(number).includes("e") && number >= 1000 && String(number).length > 3 && String(number).length <= 9) { // Add commas
         number = String(number);
         let i = number.length-3;
         while (i > 0) {
