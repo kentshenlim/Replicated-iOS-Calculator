@@ -76,7 +76,8 @@ function getAtMostNineDigitsAndEForCalculated(number) {
     // Period and comma excluded
     // Input: any number for calculated output; output: trim unwanted dp
     // For while keying in
-    if (number > 1e9 || number < 9e-9) {
+    if (number > 9e160 || number < 1e-91) return "extreme";
+    else if (number > 1e9 || number < 9e-9) {
         number = number.toExponential().replace("+", "");
         let frontPart = number.split("e")[0],
         exponentialPart = number.split("e")[1],
@@ -102,7 +103,7 @@ function padCommaAndUpdateDisplay(number) {
     // Update display, padding comma if necessary
     // Input: new content; output: none
     const screen = document.querySelector("#screen");
-    if (number === Infinity) number = "Error";
+    if (number === Infinity || number === "extreme") number = "Error";
     else if (!String(number).includes("e") && number >= 1000 && String(number).length > 3 && String(number).length <= 9) { // Add commas
         number = String(number);
         let i = number.length-3;
