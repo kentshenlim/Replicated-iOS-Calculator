@@ -130,17 +130,19 @@ const digits = document.querySelectorAll("button.digit"); // 0-9 and period
 digits.forEach(digit => {
     digit.addEventListener("click", () => {
         operatorSet = false; // Abort possibility of operator followed directly by =
-        if (currentDisplay === "0" || currentDisplay === "-0") {
-            currentDisplay = currentDisplay.replace("0", "");
-        } // Never start display with 0, unless decimal
-        currentDisplay += digit.textContent; // Concatenate numbers
-        updateDisplay(currentDisplay);
-        /* After a calculation completed, pressing a digit implies no longer
-        interested in current answer, so can abort.
-        */
-        if (numberArray.length != 0 && operatorArray.length == 0) {
-            numberArray = [];
-        } // Bug fix 1, cf README.md
+            if (currentDisplay.length < 9) {
+                if (currentDisplay === "0" || currentDisplay === "-0") {
+                    currentDisplay = currentDisplay.replace("0", "");
+                } // Never start display with 0, unless decimal
+                currentDisplay += digit.textContent; // Concatenate numbers
+                updateDisplay(currentDisplay);
+                /* After a calculation completed, pressing a digit implies no longer
+                interested in current answer, so can abort.
+                */
+                if (numberArray.length != 0 && operatorArray.length == 0) {
+                    numberArray = [];
+                } // Bug fix 1, cf README.md
+            }
         check();
     })
 });
