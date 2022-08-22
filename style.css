@@ -126,6 +126,9 @@ body>.calculator-panel {
     margin-bottom: 1%;
     border: solid green 3px;
     margin-right: 5%;
+    height: 4rem;
+    width: 95%;
+    text-align: end;
 }
 
 
