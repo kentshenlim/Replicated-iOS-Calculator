@@ -95,7 +95,7 @@ function getAtMostNineDigitsAndEForCalculated(number) {
         supposedDP = 9 - beforeDecimal.length;
         return getNDPIfNonInteger(number, supposedDP);
     } // Numbers with long decimals
-    else return number; // Otherwise
+    else return number; // Otherwise do nothing
 }
 
 
@@ -117,8 +117,7 @@ function padCommaAndUpdateDisplay(number) {
 }
 
 
-const displayBlock = document.querySelector("p#screen"),
-backUpFontSize = window.getComputedStyle(displayBlock).getPropertyValue("font-size");
+const displayBlock = document.querySelector("p#screen");
 function isOverflowHorizontally(node) {
     // Check if the text content width of node exceeds the width of containing box
     // Input: node; output: Boolean true if overflow happens
@@ -131,10 +130,11 @@ function removeOverflow(node) {
     remFactor = 2,
     fontSizeString;
     if (isOverflowHorizontally(node)) {
-        while (isOverflowHorizontally(node) && remCount < 5) {
+        while (isOverflowHorizontally(node) && remCount < 10) {
             remCount += 1;
             remFactor -= 0.1;
             fontSizeString = "calc(24px + " + remFactor + "rem)";
+            console.log(fontSizeString);
             node.style.fontSize = fontSizeString;
         }
     } else node.style.fontSize = "calc(24px + 2rem)"; // Default
@@ -158,6 +158,12 @@ function check() {
     console.log(`Current display: ${currentDisplay}`);
     console.log(`Operator array: ${operatorArray}`);
     console.log(`Number array: ${numberArray}`);
+}
+
+
+function checkSize() {
+    console.log(`Scroll width: ${displayBlock.scrollWidth}`);
+    console.log(`Client width: ${displayBlock.clientWidth}`);
 }
 
 
