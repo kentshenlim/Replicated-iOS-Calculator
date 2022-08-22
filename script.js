@@ -127,15 +127,17 @@ function isOverflowHorizontally(node) {
 
 
 function removeOverflow(node) {
-    let currentFontSize;
+    let remCount = 0,
+    remFactor = 2,
+    fontSizeString;
     if (isOverflowHorizontally(node)) {
-        while (isOverflowHorizontally(node)) {
-            currentFontSize = window.getComputedStyle(node).getPropertyValue("font-size");
-            currentFontSize = +(currentFontSize.slice(0, currentFontSize.length-2));
-            console.log(currentFontSize);
-            node.style.fontSize = currentFontSize*0.95 + "px";
+        while (isOverflowHorizontally(node) && remCount < 5) {
+            remCount += 1;
+            remFactor -= 0.1;
+            fontSizeString = "calc(24px + " + remFactor + "rem)";
+            node.style.fontSize = fontSizeString;
         }
-    } else node.style.fontSize = backUpFontSize;
+    } else node.style.fontSize = "calc(24px + 2rem)"; // Default
 }
 
 
