@@ -111,11 +111,14 @@ function padCommaAndUpdateDisplay(number) {
             number = number.slice(0,i) + "," + number.slice(i);
             i -= 3;
         }
-    } 
+    }
     screen.textContent = number;
+    removeOverflow(displayBlock);
 }
 
 
+const displayBlock = document.querySelector("p#screen"),
+backUpFontSize = window.getComputedStyle(displayBlock).getPropertyValue("font-size");
 function isOverflowHorizontally(node) {
     // Check if the text content width of node exceeds the width of containing box
     // Input: node; output: Boolean true if overflow happens
@@ -123,19 +126,17 @@ function isOverflowHorizontally(node) {
 }
 
 
-function resizeOverflow(node) {
+function removeOverflow(node) {
     let currentFontSize;
-    while (isOverflowHorizontally(node)) {
-        currentFontSize = window.getComputedStyle(node).getPropertyValue("font-size");
-        currentFontSize = +(currentFontSize.slice(0, currentFontSize.length-2));
-        
-        console.log(currentFontSize);
-        node.style.fontSize = currentFontSize*0.95 + "px";
-
-    }
+    if (isOverflowHorizontally(node)) {
+        while (isOverflowHorizontally(node)) {
+            currentFontSize = window.getComputedStyle(node).getPropertyValue("font-size");
+            currentFontSize = +(currentFontSize.slice(0, currentFontSize.length-2));
+            console.log(currentFontSize);
+            node.style.fontSize = currentFontSize*0.95 + "px";
+        }
+    } else node.style.fontSize = backUpFontSize;
 }
-
-const displayBlock = document.querySelector("#screen")
 
 
 function clearAll() {
