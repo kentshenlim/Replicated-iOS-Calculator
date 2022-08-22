@@ -47,14 +47,12 @@ Fix: Operate only if currentDisplay `!= 0`
 # Image Credits
 icon.png: https://pnghut.com/png/RDcWqJiKEw/scientific-calculator-symbol-mathematics-logo-transparent-png
 
-# Upcoming Features
-- [x] One `number` followed by `=` will output `NaN`  
-- [x] Handling of `+/-` first followed by `digits`  
+# Upcoming Features and Fixes   
 - [ ] Exact action of `AC` button, including changing of text content into `C`  
-- [ ] Output auto-wrapping  
-- [ ] Auto-conversion of too small or too big numbers into scientific notation    
+- [ ] Output auto-wrapping db: alternating big and small font sizes  
+- [ ] Color does not return if a button clicked too fast  
+- [x] Auto-conversion of too small or too big numbers into scientific notation    
 - [ ] Difference in color change during holding and tapping  
-- [x] Stop user from entering more than one period  
-- [ ] Stop user from entering more than one `+/-`  
-- [x] Handling of `+/-` after `operators`  
+- [ ] Padding of comma in the presence of period   
+- [ ] Stop user from entering more than one `+/-`   
 - [ ] Handling of `=` and `+/-` at the beginning  

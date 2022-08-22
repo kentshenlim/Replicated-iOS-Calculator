@@ -121,12 +121,13 @@ const displayBlock = document.querySelector("p#screen");
 function isOverflowHorizontally(node) {
     // Check if the text content width of node exceeds the width of containing box
     // Input: node; output: Boolean true if overflow happens
+    checkSize();
     return node.clientWidth < node.scrollWidth; // If not equal overflow happens
 }
 
 
 function removeOverflow(node) {
-    let remCount = 0,
+    let remCount = 0, // Safety measure
     remFactor = 2,
     fontSizeString;
     if (isOverflowHorizontally(node)) {
@@ -162,6 +163,7 @@ function check() {
 
 
 function checkSize() {
+    // Checker function for debugging, will be removed
     console.log(`Scroll width: ${displayBlock.scrollWidth}`);
     console.log(`Client width: ${displayBlock.clientWidth}`);
 }
