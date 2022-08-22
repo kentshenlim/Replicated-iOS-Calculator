@@ -116,6 +116,28 @@ function padCommaAndUpdateDisplay(number) {
 }
 
 
+function isOverflowHorizontally(node) {
+    // Check if the text content width of node exceeds the width of containing box
+    // Input: node; output: Boolean true if overflow happens
+    return node.clientWidth < node.scrollWidth; // If not equal overflow happens
+}
+
+
+function resizeOverflow(node) {
+    let currentFontSize;
+    while (isOverflowHorizontally(node)) {
+        currentFontSize = window.getComputedStyle(node).getPropertyValue("font-size");
+        currentFontSize = +(currentFontSize.slice(0, currentFontSize.length-2));
+        
+        console.log(currentFontSize);
+        node.style.fontSize = currentFontSize*0.95 + "px";
+
+    }
+}
+
+const displayBlock = document.querySelector("#screen")
+
+
 function clearAll() {
     // Initialize calculator, for AC button
     // Input and output: none
