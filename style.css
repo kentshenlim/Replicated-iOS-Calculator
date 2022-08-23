@@ -46,7 +46,6 @@ body>.calculator-panel {
     flex: 1 1 auto;
     position: relative;
     padding: 0;
-    border: red 3px solid;
 }
 
 
@@ -124,12 +123,12 @@ body>.calculator-panel {
     bottom: 0;
     right: 0;
     margin-bottom: 1%;
-    border: solid green 3px;
     margin-right: 5%;
     height: 4rem;
     min-height: fit-content;
-    width: 95%;
+    width: 90%;
     text-align: end;
+    border: green 3px solid;
 }
 
 
