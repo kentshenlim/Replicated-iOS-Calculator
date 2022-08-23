@@ -124,7 +124,6 @@ small font-size to default, causing overflow*/
 function isOverflowHorizontally(node) {
     // Check if the text content width of node exceeds the width of containing box
     // Input: node; output: Boolean true if overflow happens
-    checkSize();
     return (node.clientWidth < node.scrollWidth); // If not equal overflow happens
 }
 
@@ -162,14 +161,6 @@ function check() {
     console.log(`Current display: ${currentDisplay}`);
     console.log(`Operator array: ${operatorArray}`);
     console.log(`Number array: ${numberArray}`);
-}
-
-
-function checkSize() {
-    // Checker function for debugging, will be removed
-    let displayBlock = document.querySelector("p#screen");
-    console.log(`Scroll width: ${displayBlock.scrollWidth}`);
-    console.log(`Client width: ${displayBlock.clientWidth}`);
 }
 
 
