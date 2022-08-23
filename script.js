@@ -102,7 +102,6 @@ function getAtMostNineDigitsAndEForCalculated(number) {
 function padCommaAndUpdateDisplay(number) {
     // Update display, padding comma if necessary
     // Input: new content; output: none
-    const screen = document.querySelector("#screen");
     if (number === Infinity || number === "extreme") number = "Error";
     else if (!String(number).includes("e") && number >= 1000 && String(number).length > 3 && String(number).length <= 9) { // Add commas
         number = String(number);
@@ -112,7 +111,7 @@ function padCommaAndUpdateDisplay(number) {
             i -= 3;
         }
     }
-    screen.textContent = number;
+    displayBlock.textContent = number;
     removeOverflow(displayBlock);
 }
 
