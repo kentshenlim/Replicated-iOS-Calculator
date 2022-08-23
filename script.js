@@ -112,7 +112,7 @@ function padCommaAndUpdateDisplay(number) {
         }
     }
     let displayBlock = document.querySelector("p#screen");
-    displayBlock.style.fontSize = "calc(24px + 2rem)";
+    displayBlock.style.fontSize = "calc(24px + 2rem)"; // See comment below
     displayBlock.textContent = number;
     removeOverflow(displayBlock);
 } /*Must reset the font-size to default every time display; if the font-size has 
@@ -121,7 +121,7 @@ this will lead to else-execution of removeOverflow, returning the originally
 small font-size to default, causing overflow*/
 
 
-function isOverflowHorizontally(node) {
+function isOverflow(node) {
     // Check if the text content width of node exceeds the width of containing box
     // Input: node; output: Boolean true if overflow happens
     return (node.clientWidth < node.scrollWidth || node.clientHeight < node.scrollHeight); // If not equal overflow happens
@@ -132,12 +132,11 @@ function removeOverflow(node) {
     let remCount = 0, // Safety measure
     remFactor = 2,
     fontSizeString;
-    if (isOverflowHorizontally(node)) {
-        while (isOverflowHorizontally(node) && remCount < 50) {
+    if (isOverflow(node)) {
+        while (isOverflow(node) && remCount < 50) {
             remCount += 1;
             remFactor -= 0.1;
             fontSizeString = "calc(24px + " + remFactor + "rem)";
-            console.log(fontSizeString);
             node.style.fontSize = fontSizeString;
         }
     } else node.style.fontSize = "calc(24px + 2rem)"; // Default
