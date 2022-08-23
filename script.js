@@ -112,9 +112,13 @@ function padCommaAndUpdateDisplay(number) {
         }
     }
     let displayBlock = document.querySelector("p#screen");
+    displayBlock.style.fontSize = "calc(24px + 2rem)";
     displayBlock.textContent = number;
     removeOverflow(displayBlock);
-}
+} /*Must reset the font-size to default every time display; if the font-size has 
+been resized in previous calculation, the latest font-size might not cause overflow,
+this will lead to else-execution of removeOverflow, returning the originally
+small font-size to default, causing overflow*/
 
 
 function isOverflowHorizontally(node) {
