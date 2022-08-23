@@ -111,17 +111,17 @@ function padCommaAndUpdateDisplay(number) {
             i -= 3;
         }
     }
+    let displayBlock = document.querySelector("p#screen");
     displayBlock.textContent = number;
     removeOverflow(displayBlock);
 }
 
 
-const displayBlock = document.querySelector("p#screen");
 function isOverflowHorizontally(node) {
     // Check if the text content width of node exceeds the width of containing box
     // Input: node; output: Boolean true if overflow happens
     checkSize();
-    return node.clientWidth < node.scrollWidth; // If not equal overflow happens
+    return (node.clientWidth < node.scrollWidth); // If not equal overflow happens
 }
 
 
@@ -130,7 +130,7 @@ function removeOverflow(node) {
     remFactor = 2,
     fontSizeString;
     if (isOverflowHorizontally(node)) {
-        while (isOverflowHorizontally(node) && remCount < 10) {
+        while (isOverflowHorizontally(node) && remCount < 50) {
             remCount += 1;
             remFactor -= 0.1;
             fontSizeString = "calc(24px + " + remFactor + "rem)";
@@ -163,6 +163,7 @@ function check() {
 
 function checkSize() {
     // Checker function for debugging, will be removed
+    let displayBlock = document.querySelector("p#screen");
     console.log(`Scroll width: ${displayBlock.scrollWidth}`);
     console.log(`Client width: ${displayBlock.clientWidth}`);
 }
