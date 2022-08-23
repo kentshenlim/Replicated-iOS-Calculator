@@ -124,7 +124,7 @@ small font-size to default, causing overflow*/
 function isOverflowHorizontally(node) {
     // Check if the text content width of node exceeds the width of containing box
     // Input: node; output: Boolean true if overflow happens
-    return (node.clientWidth < node.scrollWidth); // If not equal overflow happens
+    return (node.clientWidth < node.scrollWidth || node.clientHeight < node.scrollHeight); // If not equal overflow happens
 }
 
 
