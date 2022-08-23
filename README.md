@@ -49,10 +49,9 @@ icon.png: https://pnghut.com/png/RDcWqJiKEw/scientific-calculator-symbol-mathema
 
 # Upcoming Features and Fixes   
 - [ ] Exact action of `AC` button, including changing of text content into `C`  
-- [ ] Output auto-wrapping db: alternating big and small font sizes  
-- [ ] Color does not return if a button clicked too fast  
-- [x] Auto-conversion of too small or too big numbers into scientific notation    
+- [ ] Output auto-wrapping db: make lowest level of text never changes  
+- [ ] Color does not return if a button clicked too fast    
 - [ ] Difference in color change during holding and tapping  
 - [ ] Padding of comma in the presence of period   
-- [ ] Stop user from entering more than one `+/-`   
+- [ ] Stop successive `+/-` reset entered number to zero     
 - [ ] Handling of `=` and `+/-` at the beginning  
